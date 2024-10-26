@@ -1,12 +1,21 @@
-import * as React from 'react';
+"use client";
 
+import * as React from 'react';
+import Link from 'next/link';
 import { AppBar, Box, Toolbar, Typography, IconButton } from '@mui/material';
+import { usePathname } from 'next/navigation';
 // import Link from 'next/link';
 const Navbar = () => {
+  const pathname = usePathname();
+  const isActive = (path) => pathname === path;
+
   return (
     <Box sx={{ flexGrow: 1, backgroundColor: 'white' }}>
       <AppBar position="static" color="transparent">
-        <Toolbar className="p-8">
+        <Toolbar className="p-8"
+        sx = {{
+          justifyContent: 'space-evenly'
+        }}>
           <IconButton
             size="small"
             edge="start"
@@ -43,45 +52,69 @@ const Navbar = () => {
               </defs>
             </svg>
           </IconButton>
-          <Typography
-            color="black"
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-            align="center"
-          >
-            {/* Add links here  */}
-            Home
-          </Typography>
-          <Typography
-            color="black"
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-            align="center"
-          >
-            About
-          </Typography>
-          <Typography
-            color="black"
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-            align="center"
-          >
-            Games
-          </Typography>
-          <Typography
-            color="black"
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1 }}
-            align="center"
-          >
-            <strong>
-              <u>Contact</u>
-            </strong>
-          </Typography>
+
+          <Link href="/home" passHref>
+            <Typography
+              color="black"
+              variant="h6"
+              component="div"
+              sx={{
+                mx: 2,
+                textDecoration: isActive('/home') ? 'underline' : 'none',
+              }}
+              align="center"
+            >
+              {/* Add links here  */}
+              Home
+            </Typography>
+          </Link>
+          <Link href="/about" passHref>
+            <Typography
+              color="black"
+              variant="h6"
+              component="div"
+              sx={{
+                mx: 2,
+                flexGrow: 1,
+                textDecoration: isActive('/about') ? 'underline' : 'none',
+              }}
+              align="center"
+            >
+              About
+            </Typography>
+          </Link>
+          <Link href="/games" passHref>
+            <Typography
+              color="black"
+              variant="h6"
+              component="div"
+              sx={{
+                mx: 2,
+                flexGrow: 1,
+                textDecoration: isActive('/games') ? 'underline' : 'none',
+              }}
+              align="center"
+            >
+              Games
+            </Typography>
+          </Link>
+          <Link href="/" passHref>
+            <Typography
+              color="black"
+              variant="h6"
+              component="div"
+              sx={{
+                mx: 2,
+                flexGrow: 1,
+                textDecoration: isActive('/') ? 'underline' : 'none',
+              }}
+              align="center"
+            >
+              <strong>
+                <u>Contact</u>
+              </strong>
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
