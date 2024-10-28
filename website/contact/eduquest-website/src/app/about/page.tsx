@@ -1,9 +1,11 @@
 import Navbar from '@/components/Navbar';
 import { Box, Typography, Avatar, Grid2 } from '@mui/material';
 
+
 //import TeamMember from '@/components/TeamMember';
 import TeamBanner from '@/components/TeamBanner';
 import MissionStatement from '@/components/MissionStatement';
+import OurPartnersBanner from '@/components/OurPartnersBanner';
 
 const teamMembers = [
     { name: 'Payamullah Erfan', image: '/pictures/Payam.jpg', title: "Project Manager"},
@@ -26,6 +28,11 @@ const teamMembers = [
     
 ]; 
 
+const partners = [
+    { name: "LMNT", logo: '/images/LMNT_Logo.png', link: 'https://www.lmnt.com/'},
+    { name: "Open Project", logo: "/images/OpenProject.png", link: 'https://openprojectberkeley.com/about/'},
+]
+
 const About = () => {
   return (
     <div>
@@ -43,6 +50,7 @@ const About = () => {
         <MissionStatement></MissionStatement>
         {/* Add content for the Games page */}
         <TeamBanner teamMembers={teamMembers}/>;
+        <OurPartnersBanner partners={partners}/>;
       </Box>
       
     </div>
