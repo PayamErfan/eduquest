@@ -1,24 +1,27 @@
 import Navbar from '@/components/Navbar';
 import { Box, Typography, Avatar, Grid2 } from '@mui/material';
 
+//import TeamMember from '@/components/TeamMember';
+import TeamBanner from '@/components/TeamBanner';
+
 const teamMembers = [
     { name: 'Payamullah Erfan', image: '/pictures/Payam.jpg'},
     { name: 'Gabriel Gomes', image: 'Pictures/IMG_2778.jpg'},
-    { name: 'Isaac Lei', image: '/images/isaac.jpg' },
-    { name: 'Rachel Cheung', image: '/images/rachel.jpg' },
-    { name: 'Avery Estes', image: '/images/avery.jpg' },
-    { name: 'Ava Joshi', image: '/images/ava.jpg' },
-    { name: 'Anupriya Islam', image: '/images/anupriya.jpg' },
-    { name: 'Bhavita Peddi', image: '/images/bhavita.jpg' },
-    { name: 'Mihir Mirchandani', image: '/images/mihir.jpg' },
-    { name: 'Jasraj Dhillon', image: '/images/jasraj.jpg' },
-    { name: 'Jenny Liang', image: '/images/jasraj.jpg' },
-    { name: 'Temmie Park', image: '/images/rachel.jpg' },
-    { name: 'Jonathan Herrera Gonzalez', image: '/images/avery.jpg' },
-    { name: 'Turner Osswald', image: '/images/ava.jpg' },
-    { name: 'Jun Kim', image: '/images/anupriya.jpg' },
-    { name: 'Alyssa Chiu', image: '/images/bhavita.jpg' },
-    { name: 'Anushka Verma', image: '/images/mihir.jpg' },
+    { name: 'Isaac Lei', image: 'Pictures/IMG_0262.JPG' },
+    { name: 'Rachel Cheung', image: 'Pictures/IMG_2417.jpg' },
+    { name: 'Avery Estes', image: 'Pictures/Screenshot\ 2024-10-24\ 130322.png' },
+    { name: 'Ava Joshi', image: 'Pictures/Ava_Joshi.jpg' },
+    { name: 'Anupriya Islam', image: 'Pictures/Anupriya.jpg' },
+    { name: 'Bhavita Peddi', image: 'Pictures/Bhavita.jpg' },
+    { name: 'Mihir Mirchandani', image: 'Pictures/mihir_mirchandani.jpeg' },
+    { name: 'Jasraj Dhillon', image: 'Pictures/Jasraj.jpg' },
+    { name: 'Jenny Liang', image: 'Pictures/Jenny_liang.png' },
+    { name: 'Temmie Park', image: 'Pictures/Temmie.jpg' },
+    { name: 'Jonathan Herrera Gonzalez', image: 'Pictures/IMG_2544.jpg' },
+    { name: 'Turner Osswald', image: 'Pictures/Screenshot\ 2024-10-24\ 114908.png' },
+    { name: 'Jun Kim', image: 'Pictures/IMG_8804.jpeg' },
+    { name: 'Alyssa Chiu', image: 'Pictures/Alyssa.jpeg' },
+    { name: 'Anushka Verma', image: 'Pictures/anushka_verma.jpg' },
     
 ]; 
 
@@ -28,58 +31,7 @@ const About = () => {
       <Navbar />
       <h1>About Page</h1>
       {/* Add content for the Games page */}
-      <Box
-        sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: 4,
-            backgroundColor: '#f4e7e1',
-            minHeight: '100vh',
-        }}
-        >
-        <Typography variant="h4" gutterBottom>
-            Meet Our Team
-        </Typography>
-        <Grid2 container spacing={4} sx={{ maxWidth: '800px', marginTop: 2 }}>
-            {teamMembers.map((member, index) => (
-            <Grid2
-                item
-                xs={6}
-                sm={4}
-                md={3}
-                lg={2}
-                key={index}
-                sx={{ textAlign: 'center' }}
-            >
-                <Avatar
-                alt={member.name}
-                src={member.image}
-                sx={{
-                    width: 100,
-                    height: 100,
-                    margin: 'auto',
-                    boxShadow: 2,
-                }}
-                />
-                <Box
-                sx={{
-                    backgroundColor: '#ffecb3',
-                    borderRadius: '8px',
-                    padding: '4px 8px',
-                    display: 'inline-block',
-                    marginTop: 1,
-                }}
-                >
-                <Typography variant="body1" fontWeight="medium">
-                    {member.name}
-                </Typography>
-                </Box>
-            </Grid2>
-            ))}
-        </Grid2>
-    </Box>
+      <TeamBanner teamMembers={teamMembers}/>;
     </div>
   );
 };
