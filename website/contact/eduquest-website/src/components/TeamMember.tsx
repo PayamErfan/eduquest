@@ -4,9 +4,10 @@ import { Box, Typography, Avatar } from '@mui/material';
 interface TeamMemberProps {
   name: string;
   image: string;
+  title: string;
 }
 
-const TeamMember: React.FC<TeamMemberProps> = ({ name, image }) => {
+const TeamMember: React.FC<TeamMemberProps> = ({ name, image, title }) => {
   return (
     <Box sx={{ textAlign: 'center' }}>
       {/* Outer box to serve as a wooden frame */}
@@ -47,6 +48,7 @@ const TeamMember: React.FC<TeamMemberProps> = ({ name, image }) => {
         <Typography variant="body1" fontWeight="bold" color="black">
           {name}
         </Typography>
+        <Typography variant="body1" color="black">{title}</Typography>
       </Box>
     </Box>
   );

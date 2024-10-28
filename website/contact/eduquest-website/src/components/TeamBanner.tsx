@@ -65,7 +65,7 @@ const TeamBanner: React.FC<TeamToggleProps> = ({ teamMembers }) => {
                     md={3}
                     lg={2}
                     key={index}>
-                    <TeamMember name={member.name} image={member.image} />
+                    <TeamMember name={member.name} image={member.image} title={member.title}/>
                 
                     
                 </Grid2>
