@@ -80,7 +80,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column' as const,
     alignItems: 'flex-start',
-    marginLeft: '400px'
+    marginLeft: '260px'
   },
   openProjectIcon: {
     marginRight: '10px', // Space between Open Project logo and EduQuest text
@@ -113,14 +113,14 @@ const styles = {
     marginBottom: '70px'
   },
   icon: {
-    width: '20px',
-    height: '20px',
+    width: '30px',
+    height: '30px',
     marginRight: '8px' // Space between icon and text
   },
   contactText: {
     marginTop: '9px',
     color: 'black',
-    fontSize: '14px'
+    fontSize: '18px'
   },
   footerNav: {
     display: 'flex',
@@ -141,7 +141,7 @@ const styles = {
   link: {
     color: 'black',
     textDecoration: 'none',
-    fontSize: '14px' // Adjusted font size for better readability
+    fontSize: '18px' // Adjusted font size for better readability
   },
   footerRight: {
     display: 'flex',
@@ -162,7 +162,7 @@ const styles = {
   },
   iconText: {
     marginLeft: '8px', // Space between icon and text
-    fontSize: '14px'
+    fontSize: '18px'
   },
   scrollTopButton: {
     position: 'fixed' as const,
