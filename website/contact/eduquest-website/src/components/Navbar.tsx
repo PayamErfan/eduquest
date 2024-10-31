@@ -12,10 +12,12 @@ const Navbar = () => {
   return (
     <Box sx={{ flexGrow: 1, backgroundColor: 'white' }}>
       <AppBar position="static" color="transparent">
-        <Toolbar className="p-8"
-        sx = {{
-          justifyContent: 'space-evenly'
-        }}>
+      <Toolbar
+        sx={{
+        justifyContent: 'center', // Center everything
+        gap: '8rem'               // Adds equal spacing between items
+        }}
+      >
         <Link href="https://openprojectberkeley.com/about/" passHref target="_blank">
           <IconButton
             size="small"
@@ -25,8 +27,8 @@ const Navbar = () => {
             sx={{ mr: 2 }}
           >
             <svg
-              width="70"
-              height="85"
+              width="50"
+              height="65"
               viewBox="0 0 70 85"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -56,67 +58,58 @@ const Navbar = () => {
           </Link>
 
           <Link href="/home" passHref>
-            <Typography
-              color="black"
-              variant="h6"
-              component="div"
-              sx={{
-                mx: 2,
-                textDecoration: isActive('/home') ? 'underline' : 'none',
-              }}
-              align="center"
-            >
-              {/* Add links here  */}
-              Home
-            </Typography>
-          </Link>
-          <Link href="/about" passHref>
-            <Typography
-              color="black"
-              variant="h6"
-              component="div"
-              sx={{
-                mx: 2,
-                flexGrow: 1,
-                textDecoration: isActive('/about') ? 'underline' : 'none',
-              }}
-              align="center"
-            >
-              About
-            </Typography>
-          </Link>
-          <Link href="/games" passHref>
-            <Typography
-              color="black"
-              variant="h6"
-              component="div"
-              sx={{
-                mx: 2,
-                flexGrow: 1,
-                textDecoration: isActive('/games') ? 'underline' : 'none',
-              }}
-              align="center"
-            >
-              Games
-            </Typography>
-          </Link>
-          <Link href="/" passHref>
-            <Typography
-              color="black"
-              variant="h6"
-              component="div"
-              sx={{
-                mx: 2,
-                flexGrow: 1,
-                textDecoration: isActive('/') ? 'underline' : 'none',
-              }}
-              align="center"
-            >
-              <strong>
-                <u>Contact</u>
-              </strong>
-            </Typography>
-          </Link>
+    <Typography
+      color="black"
+      variant="h6"
+      component="div"
+      className={`relative text-xl w-fit block ${
+        isActive('/home') ? 'font-bold after:scale-x-100' : 'after:scale-x-0'
+      } after:block after:content-[''] after:absolute after:h-[3px] after:bg-black after:w-full after:hover:scale-x-100 after:transition after:duration-300 after:origin-center mx-1`}
+      align="center"
+    >
+      Home
+    </Typography>
+  </Link>
+  <Link href="/about" passHref>
+    <Typography
+      color="black"
+      variant="h6"
+      component="div"
+      className={`relative text-xl w-fit block ${
+        isActive('/about') ? 'font-bold after:scale-x-100' : 'after:scale-x-0'
+      } after:block after:content-[''] after:absolute after:h-[3px] after:bg-black after:w-full after:hover:scale-x-100 after:transition after:duration-300 after:origin-center mx-1`}
+      align="center"
+    >
+      About
+    </Typography>
+  </Link>
+  <Link href="/games" passHref>
+    <Typography
+      color="black"
+      variant="h6"
+      component="div"
+      className={`relative text-xl w-fit block ${
+        isActive('/games') ? 'font-bold after:scale-x-100' : 'after:scale-x-0'
+      } after:block after:content-[''] after:absolute after:h-[3px] after:bg-black after:w-full after:hover:scale-x-100 after:transition after:duration-300 after:origin-center mx-1`}
+      align="center"
+    >
+      Games
+    </Typography>
+  </Link>
+  <Link href="/" passHref>
+    <Typography
+      color="black"
+      variant="h6"
+      component="div"
+      className={`relative text-xl w-fit block ${
+        isActive('/') ? 'font-bold after:scale-x-100' : 'after:scale-x-0'
+      } after:block after:content-[''] after:absolute after:h-[3px] after:bg-black after:w-full after:hover:scale-x-100 after:transition after:duration-300 after:origin-center mx-1`}
+      align="center"
+    >
+      Contact
+    </Typography>
+  </Link>
+        
         </Toolbar>
       </AppBar>
     </Box>
