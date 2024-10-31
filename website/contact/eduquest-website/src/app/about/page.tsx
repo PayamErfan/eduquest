@@ -6,6 +6,16 @@ import { Box, Typography, Avatar, Grid2 } from '@mui/material';
 import TeamBanner from '@/components/TeamBanner';
 import MissionStatement from '@/components/MissionStatement';
 import OurPartnersBanner from '@/components/OurPartnersBanner';
+import Footer from '@/components/Footer';
+
+const footerPictures = [
+  { name: "Open Project", logo:"/images/OpenProject.png", link: 'https://openprojectberkeley.com/about/'}, 
+  { name: "Phone Icon", logo:"/images/phone_logo.png", link: ''},
+  { name: "Linkedin Icon", logo:"/images/linkedin_logo.png", link: ''},
+  { name: "Pin Icon", logo:"/images/pin_logo.png", link: ''},
+  { name: "Instagram Icon", logo:"/images/instagram_logo.png", link: ''}
+]
+
 
 const teamMembers = [
     { name: 'Payamullah Erfan', image: '/pictures/Payam.jpg', title: "Project Manager"},
@@ -52,7 +62,7 @@ const About = () => {
         <TeamBanner teamMembers={teamMembers}/>;
         <OurPartnersBanner partners={partners}/>;
       </Box>
-      
+      <Footer></Footer>
     </div>
   );
 };
