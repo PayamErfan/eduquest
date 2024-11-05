@@ -6,6 +6,8 @@ import { Box, Typography, Avatar, Grid2 } from '@mui/material';
 import TeamBanner from '@/components/TeamBanner';
 import MissionStatement from '@/components/MissionStatement';
 import OurPartnersBanner from '@/components/OurPartnersBanner';
+import Footer from '@/components/Footer';
+
 
 const teamMembers = [
     { name: 'Payamullah Erfan', image: '/pictures/Payam.jpg', title: "Project Manager"},
@@ -52,7 +54,7 @@ const About = () => {
         <TeamBanner teamMembers={teamMembers}/>;
         <OurPartnersBanner partners={partners}/>;
       </Box>
-      
+      <Footer></Footer>
     </div>
   );
 };
