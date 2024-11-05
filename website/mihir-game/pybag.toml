@@ -1,3 +1,0 @@
-name = "mihir-game"
-entry ="main.py"
-assets = ["/"]
