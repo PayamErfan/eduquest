@@ -9,17 +9,15 @@ function Button() {
     };
 
     return (
-        <Link href='/about' passHref>
-            <button onClick={handleClick} style={{ padding: '10px 20px', backgroundColor: '#F2D6A7',
-                color: 'black',
-                fontWeight: 'bold',
-                border: 'none',
-                borderRadius: '30px',
-                cursor: 'pointer',
-                fontSize: '16px'}}>
-                Learn More
+        <Link href="/about" passHref>
+            <button
+            onClick={handleClick}
+            className="px-5 py-2 bg-[#FEF5D6] text-black font-bold rounded-full text-lg cursor-pointer hover:bg-[#F2D6A7] shadow-md"
+            >
+            Learn More
             </button>
         </Link>
+
     );
 }
 
