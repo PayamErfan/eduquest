@@ -6,12 +6,9 @@ import { Box, Typography, Avatar, Grid2 } from '@mui/material';
 import TeamBanner from '@/components/TeamBanner';
 import MissionStatement from '@/components/MissionStatement';
 import OurPartnersBanner from '@/components/OurPartnersBanner';
-<<<<<<< HEAD:website/frontend/src/app/about/page.tsx
 import Footer from '@/components/Footer';
 
-=======
 import Statistics from '@/components/Statistics';
->>>>>>> b5e6affd (Added the statistics onto the about page and created some fade in animations):website/contact/eduquest-website/src/app/about/page.tsx
 
 const teamMembers = [
     { name: 'Payamullah Erfan', image: '/pictures/Payam.jpg', title: "Project Manager"},
