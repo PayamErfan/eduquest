@@ -5,7 +5,7 @@ import { Box, Typography } from '@mui/material';
 
 
 const MissionStatement: React.FC = () => {
-    const entireText = "EdduQuest aims to establish a free, online learning community for young learners. Through various subjects, English, and math, we hope to build a strong foundation for early education."
+    const entireText = "EdduQuest aims to establish a free, online learning community for young learners. Through various subjects, English, Science, and math, we hope to build a strong foundation for early education."
     const [displayedText, setDisplayedText] = useState("");
 
     useEffect(() => {

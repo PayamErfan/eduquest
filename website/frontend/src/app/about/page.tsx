@@ -6,8 +6,12 @@ import { Box, Typography, Avatar, Grid2 } from '@mui/material';
 import TeamBanner from '@/components/TeamBanner';
 import MissionStatement from '@/components/MissionStatement';
 import OurPartnersBanner from '@/components/OurPartnersBanner';
+<<<<<<< HEAD:website/frontend/src/app/about/page.tsx
 import Footer from '@/components/Footer';
 
+=======
+import Statistics from '@/components/Statistics';
+>>>>>>> b5e6affd (Added the statistics onto the about page and created some fade in animations):website/contact/eduquest-website/src/app/about/page.tsx
 
 const teamMembers = [
     { name: 'Payamullah Erfan', image: '/pictures/Payam.jpg', title: "Project Manager"},
@@ -35,6 +39,12 @@ const partners = [
     { name: "Open Project", logo: "/images/OpenProject.png", link: 'https://openprojectberkeley.com/about/'},
 ]
 
+const statsData = [
+  { label: 'Percent of K-12 instructors who use educational technology in their classrooms', value: "89%" },
+  { label: 'Percent of students who say that technology makes learning more engaging', value: "76%" },
+  { label: 'Percent of teachers who say that technology makes it easier to access their students', value: "90%" },
+]
+
 const About = () => {
   return (
     <div>
@@ -50,6 +60,7 @@ const About = () => {
             backgroundColor: "#f4e7e1",
         }}>
         <MissionStatement></MissionStatement>
+        <Statistics stats={statsData}/>
         {/* Add content for the Games page */}
         <TeamBanner teamMembers={teamMembers}/>;
         <OurPartnersBanner partners={partners}/>;
