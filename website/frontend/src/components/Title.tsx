@@ -8,6 +8,8 @@ function Title() {
                 alt="Background" 
                 style={{ width: '100vw', height: '70vh', objectFit: 'cover' }} 
             />
+
+            {/* Gradient Overlay */}
             <div style={{
                 position: 'absolute',
                 top: 0,
@@ -17,6 +19,8 @@ function Title() {
                 background: 'linear-gradient(rgba(0, 12, 93, 0.7) 0%, rgba(9, 69, 121, 0.5) 35%, rgba(204, 254, 255, 0.3) 100%)',
                 zIndex: 1,
             }}></div>
+
+            {/* Title Text */}
             <div style={{
                 position: 'absolute',
                 top: '50%',
@@ -31,6 +35,8 @@ function Title() {
             }}>
                 WELCOME TO EDUQUEST!
             </div>
+
+            {/* Scroll Arrow as Image */}
             <div style={{
                 position: 'absolute',
                 bottom: '20px',
