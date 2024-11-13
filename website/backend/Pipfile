@@ -6,6 +6,11 @@ name = "pypi"
 [packages]
 pygame = "*"
 lmnt = "*"
+flask = "*"
+fastapi = "*"
+pydantic = "*"
+uvicorn = "*"
+python-dotenv = "*"
 
 [dev-packages]
 

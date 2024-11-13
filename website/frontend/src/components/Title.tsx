@@ -3,7 +3,6 @@ import React from 'react';
 function Title() {
     return (
         <div style={{ position: 'relative', display: 'inline-block' }}>
-            {/* Background Image */}
             <img 
                 src="/images/background_home.webp" 
                 alt="Background" 

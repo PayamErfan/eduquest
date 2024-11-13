@@ -8,6 +8,7 @@ import MissionStatement from '@/components/MissionStatement';
 import OurPartnersBanner from '@/components/OurPartnersBanner';
 import Footer from '@/components/Footer';
 
+import Statistics from '@/components/Statistics';
 
 const teamMembers = [
     { name: 'Payamullah Erfan', image: '/pictures/Payam.jpg', title: "Project Manager"},
@@ -35,6 +36,12 @@ const partners = [
     { name: "Open Project", logo: "/images/OpenProject.png", link: 'https://openprojectberkeley.com/about/'},
 ]
 
+const statsData = [
+  { label: 'Percent of K-12 instructors who use educational technology in their classrooms', value: "89%" },
+  { label: 'Percent of students who say that technology makes learning more engaging', value: "76%" },
+  { label: 'Percent of teachers who say that technology makes it easier to access their students', value: "90%" },
+]
+
 const About = () => {
   return (
     <div>
@@ -49,6 +56,7 @@ const About = () => {
             backgroundColor: "#f4e7e1",
         }}>
         <MissionStatement></MissionStatement>
+        <Statistics stats={statsData}/>
         {/* Add content for the Games page */}
         <TeamBanner teamMembers={teamMembers}/>;
         <OurPartnersBanner partners={partners}/>;
