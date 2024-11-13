@@ -37,10 +37,10 @@ const Statistics: React.FC<StatisticsProps> = ({ stats }) => {
                             textAlign: 'center',
                             display: 'flex',
                             flexDirection: 'column',
-                            justifyContent: 'center',
+                            justifyContent: 'flex-start',
                             alignItems: "center",
                             width: "250px",
-                            height: "150px",
+                            height: "200px",
                             
                             opacity: 0,
                             animation: `fadeIn 1s ease ${index * 0.3}s forwards`,
