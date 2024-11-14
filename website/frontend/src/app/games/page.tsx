@@ -1,25 +1,26 @@
 import 'react';
-import { Box, Card, CardMedia } from '@mui/material';
+import { Card, CardMedia } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 export default function MediaCover() {
   return (
-    <Box>
-      <Navbar />
-      <Box
-        sx={{ height: '50%', width: '60%', marginLeft: '18%', display: 'flex' }}
-      >
+    <Grid container>
+      <Grid size={12}>
+        <Navbar />
+      </Grid>
+      <Grid justifyItems="center" size={12}>
         <Card
-          className="h-1/3 w-1/4"
           component="li"
           sx={{
             marginTop: 5,
             flexGrow: 1,
             display: 'flex',
+            width: 'auto',
           }}
         >
           {' '}
-          <Link href="/games/mihir_game" passHref>
+          <Link href="/games/formula_1" passHref>
             {' '}
             <CardMedia component="video" autoPlay loop muted>
               {' '}
@@ -27,7 +28,7 @@ export default function MediaCover() {
             </CardMedia>
           </Link>
         </Card>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }
