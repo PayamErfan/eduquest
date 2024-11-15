@@ -9,9 +9,10 @@ import { start } from 'repl';
 export default function Formula_game() {
   // const router = useRouter();
   // Easy =1 , Med = 2, Hard =3 , pixels to move oponent;
+  // make timer div, question div, and use buttons to show them,
   var data_send = {};
   var enemy_speed;
-
+  var question_data;
   const button_style = {
     mt: 2,
     width: 200,
@@ -89,6 +90,21 @@ export default function Formula_game() {
     });
     console.log(enemy_speed);
   };
+  const ready_up = (data) => {
+    let opt1_b = document.getElementById('op1_b');
+    let opt2_b = document.getElementById('op2_b');
+    let opt3_b = document.getElementById('op3_b');
+    let opt4_b = document.getElementById('op4_b');
+    let answer = data['correct_option'];
+    let choices = data['answer_options'];
+    let options_arr = [opt1_b, opt2_b, opt3_b, opt4_b];
+    options_arr.forEach((element, index) => {
+      element.innerHTML = choices[index];
+      element.style.display = 'block';
+    });
+    let question = document.getElementById('question');
+    question.innerHTML = data['question'];
+  };
   const digits = (digits) => {
     let upto10_bt = document.getElementById('10_b');
     let pass10_bt = document.getElementById('100_b');
@@ -105,7 +121,10 @@ export default function Formula_game() {
       body: JSON.stringify(data_send),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        ready_up(data);
+      })
       .catch((error) => console.log('move on with your life', error));
     console.log(data_send);
   };
@@ -265,6 +284,40 @@ export default function Formula_game() {
         >
           1-100
         </Button>
+
+        <Button
+          id="op1_b"
+          sx={button_style}
+          onClick={() => {}}
+          variant="contained"
+        >
+          option1
+        </Button>
+        <Button
+          id="op2_b"
+          sx={button_style}
+          onClick={() => {}}
+          variant="contained"
+        >
+          option2
+        </Button>
+        <Button
+          id="op3_b"
+          sx={button_style}
+          onClick={() => {}}
+          variant="contained"
+        >
+          option3
+        </Button>
+        <Button
+          id="op4_b"
+          sx={button_style}
+          onClick={() => {}}
+          variant="contained"
+        >
+          option4
+        </Button>
+        <Box id="question"></Box>
       </Grid>
     </Grid>
   );

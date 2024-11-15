@@ -26,12 +26,14 @@ def start_formula_game():
     return FileResponse('./moonlightdrive.mp3')
 @app.post('/formula_1_1')
 async def formula(operation_type: formula_1_1):
-    operation_type.digits = digits
+    global digits
+    digits= operation_type.digits
     question, correct_answer = await generate_question(operation_type.operation_type)
     answer_options = [correct_answer, correct_answer + 1, correct_answer - 1, correct_answer + 2]
     random.shuffle(answer_options)
     return {'question':question,
             'answer_options':answer_options,
+            'correct_option': correct_answer,
              'question_sound': FileResponse('./question.mp3') } 
 @app.post('/spelling_bee')
 async def spelling():

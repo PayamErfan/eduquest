@@ -157,7 +157,7 @@ async def generate_question(operation_type):
     
     return question_text, correct_answer
 
-def generate_buttons(question_text, correct_answer):
+async def generate_buttons(question_text, correct_answer):
     question_btn = Question(question_text, 625, 25)
 
     answer_btn_positions = [(375, 135), (875, 135), (375, 250), (875, 250)]
@@ -318,7 +318,7 @@ async def game_loop():
 
 
 
-def menu():
+async def menu():
     global home_screen, operation_type, DIFFICULTY, digits
 
     race_track = pygame.image.load('racetrack.png')  # Background image
