@@ -11,6 +11,7 @@ fastapi = "*"
 pydantic = "*"
 uvicorn = "*"
 python-dotenv = "*"
+pydub = "*"
 
 [dev-packages]
 
