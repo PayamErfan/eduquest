@@ -3,7 +3,10 @@ from fastapi.responses import FileResponse
 import uvicorn
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
-from game import *
+from lmnt.api import Speech
+from dotenv import load_dotenv
+import os
+# from game import *
 app=FastAPI()
 app.add_middleware(
     CORSMiddleware,
@@ -13,28 +16,25 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-class formula_1_1(BaseModel):
-    operation_type: str
-    digits: str
+class formula_1(BaseModel):
+    question: str
 # API endpoint to get the current question
-
+load_dotenv()
 
 
 # API endpoint to answer a question
-@app.get('/formula_1_1/start')
-def start_formula_game():
-    return FileResponse('./moonlightdrive.mp3')
-@app.post('/formula_1_1')
-async def formula(operation_type: formula_1_1):
-    global digits
-    digits= operation_type.digits
-    question, correct_answer = await generate_question(operation_type.operation_type)
-    answer_options = [correct_answer, correct_answer + 1, correct_answer - 1, correct_answer + 2]
-    random.shuffle(answer_options)
-    return {'question':question,
-            'answer_options':answer_options,
-            'correct_option': correct_answer,
-             'question_sound': FileResponse('./question.mp3') } 
+@app.post('/formula_1')
+async def game_formula1(question: formula_1):
+    lmntKey = os.getenv("LMNT_API_KEY")
+    questionText = question.question
+    async with Speech(api_key=lmntKey) as speech:
+        synthesis = await speech.synthesize(questionText, 'lily')
+    audioFile = f'question.mp3'
+    with open(audioFile, 'wb') as f:
+        f.write(synthesis['audio'])
+    return FileResponse(audioFile)    
+    
+
 @app.post('/spelling_bee')
 async def spelling():
     pass
