@@ -24,7 +24,7 @@ export default function MediaCover() {
             {' '}
             <CardMedia component="video" autoPlay loop muted>
               {' '}
-              <source src="/spell.mp4" type="video/mp4" />
+              <source src="/formula.mp4" type="video/mp4" />
             </CardMedia>
           </Link>
         </Card>
