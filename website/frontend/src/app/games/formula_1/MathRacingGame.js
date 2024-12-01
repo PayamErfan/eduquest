@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Car, RotateCcw, Pause, Volume2, VolumeX } from 'lucide-react';
+import { Car, RotateCcw, Pause, Volume2, VolumeX, Target } from 'lucide-react';
 // import { Speech } from 'lmnt-node';
-import * as BufferPolyfill from 'buffer';
+import { motion } from 'motion/react';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -227,6 +227,7 @@ const useMathRacing = () => {
       }
 
       // Move opponent
+
       const opponentInterval = setInterval(advanceOpponent, 1000);
       return () => clearInterval(opponentInterval);
     }
@@ -273,23 +274,30 @@ const MathRacingGame = () => {
   } = useMathRacing();
 
   const renderMenuScreen = () => (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h1 className="text-5xl font-bold mb-10 text-blue-600">Formula 1 + 1</h1>
+    <div className=" relative flex flex-col items-center  h-screen bg-gray-100">
+      <h1 className="absolute text-5xl top-1/3 font-bold mb-10 text-black">
+        Formula 1 + 1
+      </h1>
       <button
         onClick={() =>
           setGameState((prev) => ({ ...prev, gameScreen: 'difficulty' }))
         }
-        className="bg-green-500 text-white px-6 py-3 rounded-lg text-2xl hover:bg-green-600"
+        className="absolute top-1/2 bg-green-500 text-white px-6 py-3 rounded-lg text-2xl hover:bg-green-600"
       >
         Start Game
       </button>
+      <div>
+        <img src="/formula1/racetrack.png" />
+      </div>
     </div>
   );
 
   const renderDifficultyScreen = () => (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h2 className="text-3xl mb-6">Select Difficulty</h2>
-      <div className="flex space-x-4">
+    <div className="relative flex flex-col items-center h-screen bg-gray-100">
+      <h2 className=" absolute top-1/3 text-3xl mb-6 text-black">
+        Select Difficulty
+      </h2>
+      <div className="top-1/2 absolute flex space-x-4">
         {['Easy', 'Medium', 'Hard'].map((difficulty) => (
           <button
             key={difficulty}
@@ -307,13 +315,18 @@ const MathRacingGame = () => {
           </button>
         ))}
       </div>
+      <div>
+        <img src="/formula1/racetrack.png" />
+      </div>
     </div>
   );
 
   const renderOperationScreen = () => (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h2 className="text-3xl mb-6">Select Operation</h2>
-      <div className="flex space-x-4">
+    <div className="realtive flex flex-col items-center h-screen bg-gray-100">
+      <h2 className="absolute top-1/3 text-3xl mb-6 text-black">
+        Select Operation
+      </h2>
+      <div className="top-1/2 absolute flex space-x-4">
         {['Addition', 'Subtraction', 'Both'].map((operation) => (
           <button
             key={operation}
@@ -330,13 +343,18 @@ const MathRacingGame = () => {
           </button>
         ))}
       </div>
+      <div>
+        <img src="/formula1/racetrack.png" />
+      </div>
     </div>
   );
 
   const renderDigitsScreen = () => (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <h2 className="text-3xl mb-6">Select Number Range</h2>
-      <div className="flex space-x-4">
+    <div className="relative flex flex-col items-center h-screen bg-gray-100">
+      <h2 className="top-1/3 absolute text-3xl mb-6 text-black">
+        Select Number Range
+      </h2>
+      <div className=" top-1/2 absolute flex space-x-4">
         {['1-10', '1-100'].map((digits) => (
           <button
             key={digits}
@@ -352,6 +370,9 @@ const MathRacingGame = () => {
             {digits}
           </button>
         ))}
+      </div>
+      <div>
+        <img src="/formula1/racetrack.png" />
       </div>
     </div>
   );
@@ -379,32 +400,38 @@ const MathRacingGame = () => {
 
         {/* Race Track */}
         <div className="absolute w-full h-40 bg-gray-300">
-          <img src="/formula1/racetrack.png" />
+          <img className="h-dvh w-full" src="/formula1/racetrack.png" />
         </div>
 
         {/* Cars */}
-        <div
-          className="absolute left-4 bottom-48 text-red-500"
-          style={{ transform: `translateX(${playerPosition}px)` }}
+        <motion.div
+          id="player"
+          className="absolute left-4 bottom-0 z-10 text-red-500"
+          animate={{ x: playerPosition }}
         >
-          <Car size={64} />
-        </div>
-        <div
-          className="absolute left-4 bottom-56 text-blue-500"
-          style={{ transform: `translateX(${opponentPosition}px)` }}
+          {/* <Car size={64} /> */}
+          <img src="/formula1/red_car.png" />
+        </motion.div>
+        <motion.div
+          className="absolute left-4 bottom-12 text-blue-500"
+          animate={{ x: opponentPosition }}
+          // style={{ transform: `translateX(${opponentPosition}px)` }}
         >
-          <Car size={64} />
-        </div>
+          {/* <Car size={64} /> */}
+          <img src="/formula1/blue_car.png" />
+        </motion.div>
 
         {/* Question Area */}
         {currentQuestion && !isGameOver && (
           <div className="absolute top-10 left-0 right-0 flex justify-center">
             <div className="bg-white p-4 rounded-lg shadow-md">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-2xl">{currentQuestion.question}</h3>
+              <div className="flex items-center justify-center mb-4">
+                <h3 className="text-2xl text-black">
+                  {currentQuestion.question}
+                </h3>
                 <button
                   onClick={playQuestionAudio}
-                  className="ml-4 p-2 rounded-full bg-blue-100 hover:bg-blue-200"
+                  className="ml-4 p-2 rounded-full bg-blue-500 hover:bg-blue-700"
                   disabled={!soundOn}
                 >
                   <Volume2 size={20} />
