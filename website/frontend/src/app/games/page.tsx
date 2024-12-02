@@ -5,30 +5,43 @@ import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 export default function MediaCover() {
   return (
-    <Grid container>
-      <Grid size={12}>
-        <Navbar />
-      </Grid>
-      <Grid justifyItems="center" size={12}>
-        <Card
-          component="li"
-          sx={{
-            marginTop: 5,
-            flexGrow: 1,
-            display: 'flex',
-            width: 'auto',
-          }}
-        >
+    <div className="realtive  ">
+      <Navbar />
+      <div>
+        <Link href="/games/formula_1" passHref>
           {' '}
-          <Link href="/games/formula_1" passHref>
-            {' '}
-            <CardMedia component="video" autoPlay loop muted>
-              {' '}
-              <source src="/spell.mp4" type="video/mp4" />
-            </CardMedia>
-          </Link>
-        </Card>
-      </Grid>
-    </Grid>
+          <video className=" w-3/4 h-3/4 absolute left-48 top-32 ">
+            <source src="/formula1/formula.mp4" />
+          </video>
+        </Link>
+      </div>
+    </div>
+    // <Grid container>
+    //   <Grid size={12}>
+    //     <Navbar />
+    //   </Grid>
+    //   <Grid justifyItems="center" size={12}>
+    //     <Card
+    //       component="li"
+    //       sx={{
+    //         marginTop: 5,
+    //         flexGrow: 1,
+    //         display: 'flex',
+    //         width: 'auto',
+    //       }}
+    //     >
+    //       {' '}
+    //       <Link href="/games/formula_1" passHref>
+    //         {' '}
+    //         <div className="w-3/4 h-3/4">
+    //           <CardMedia component="video" autoPlay loop muted>
+    //             {' '}
+    //             <source src="/formula1/formula.mp4" type="video/mp4" />
+    //           </CardMedia>
+    //         </div>
+    //       </Link>
+    //     </Card>
+    //   </Grid>
+    // </Grid>
   );
 }
