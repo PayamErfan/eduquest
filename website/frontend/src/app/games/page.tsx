@@ -15,6 +15,14 @@ export default function MediaCover() {
           </video>
         </Link>
       </div>
+      <div>
+        <Link href="/games/mapQuest" passHref>
+          {' '}
+          <video className=" w-3/4 h-3/4 absolute left-48 top-32 ">
+            <source src="/formula1/formula.mp4" />
+          </video>
+        </Link>
+      </div>
     </div>
     // <Grid container>
     //   <Grid size={12}>
