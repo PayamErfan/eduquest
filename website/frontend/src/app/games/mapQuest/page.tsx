@@ -17,7 +17,7 @@ const continentImages: Record<Continent, string> = {
   Europe: 'mapQuest_images/Continents/Europe.png',
   NorthAmerica: 'mapQuest_images/Continents/North_America.svg',
   SouthAmerica: 'mapQuest_images/Continents/South_America.png',
-  Antarctica: 'mapQuest_images/Continents/Antarctica.png',
+  Antarctica: 'mapQuest_images/Continents/Antartica.png',
   Australia: 'mapQuest_images/Continents/Oceania.png',
 };
 
@@ -25,10 +25,11 @@ const continentImages: Record<Continent, string> = {
 const generateQuestion = (): Question => {
   const continents = Object.keys(continentImages) as Continent[]; // Explicitly cast keys as Continent[]
   const correctAnswer = continents[Math.floor(Math.random() * continents.length)];
-  const shuffledChoices = shuffleArray(continents);
+  const newArray = continents.filter(item => item !== correctAnswer)
+  const shuffledChoices = shuffleArray(newArray);
   return {
     correctAnswer,
-    choices: shuffledChoices.slice(0, 4),
+    choices: shuffledChoices.slice(0, 3).concat(correctAnswer),
   };
 };
 
@@ -54,6 +55,8 @@ const MapGame: React.FC = () => {
     if (timer > 0) {
       const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
       return () => clearInterval(interval);
+    } else {
+      handleTimerEnd();
     }
   }, [timer]);
 
@@ -68,8 +71,9 @@ const MapGame: React.FC = () => {
         setQuestion(generateQuestion());
         setSelectedAnswer(null);
         setMessage('');
-        setTimer(30);
+        setTimer(10);
       }, 2000);
+      
     } else {
       setMessage('Try Again!');
       setSelectedAnswer(answer);
@@ -79,6 +83,18 @@ const MapGame: React.FC = () => {
         setMessage('');
       }, 2000);
     }
+  };
+
+  const handleTimerEnd = () => {
+    setMessage('Time Out!');
+    setSelectedAnswer(question!.correctAnswer);
+
+    setTimeout(() => {
+      setQuestion(generateQuestion());
+      setSelectedAnswer(null);
+      setMessage('');
+      setTimer(10);
+    }, 2000);
   };
 
   // If the question is still null (loading), show a fallback
@@ -108,12 +124,13 @@ const MapGame: React.FC = () => {
                     ? choice === question.correctAnswer
                       ? 'green'
                       : 'red'
-                    : 'white',
+                    : 'black',
               }}
             >
               {choice}
             </button>
-          ))}
+          ))
+          }
         </div>
         <p>{message}</p>
         <p>Time left: {timer}s</p>
