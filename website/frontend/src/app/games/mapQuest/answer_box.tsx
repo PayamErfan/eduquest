@@ -35,4 +35,4 @@ const AnswerBox: React.FC<AnswerBoxProps> = ({ text, isSelected, onSelect }) => 
  );
 };
 
-export AnswerBox
+export default AnswerBox;

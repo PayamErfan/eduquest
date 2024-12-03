@@ -21,53 +21,75 @@ const continentImages: Record<Continent, string> = {
   Australia: 'mapQuest_images/Continents/Oceania.png',
 };
 
-// Generate a random question
-const generateQuestion = (): Question => {
-  const continents = Object.keys(continentImages) as Continent[]; // Explicitly cast keys as Continent[]
-  const correctAnswer = continents[Math.floor(Math.random() * continents.length)];
-  const newArray = continents.filter(item => item !== correctAnswer)
-  const shuffledChoices = shuffleArray(newArray);
-  return {
-    correctAnswer,
-    choices: shuffledChoices.slice(0, 3).concat(correctAnswer),
-  };
-};
-
 // Shuffle array
 const shuffleArray = (array: Continent[]): Continent[] => {
   return [...array].sort(() => Math.random() - 0.5);
 };
 
 const MapGame: React.FC = () => {
-  const [question, setQuestion] = useState<Question | null>(null); // Initialize as null
+  const continents: Continent[] = ['Africa', 'Asia', 'Europe', 'NorthAmerica', 'SouthAmerica', 'Antarctica', 'Australia'];
+  const [usedContinents, setUsedContinents] = useState<Continent[]>([]); // Track used continents
+  const [question, setQuestion] = useState<Question | null>(null); // Current question
   const [selectedAnswer, setSelectedAnswer] = useState<Continent | null>(null);
   const [score, setScore] = useState<number>(0);
   const [message, setMessage] = useState<string>('');
   const [timer, setTimer] = useState<number>(30);
+  const [gameOver, setGameOver] = useState<boolean>(false); // Track game over status
+
+  // Generate a random question from remaining continents
+  const generateQuestion = (): Question => {
+    // Filter out used continents
+    const remainingContinents = continents.filter(continent => !usedContinents.includes(continent));
+    if (remainingContinents.length === 0) {
+      setGameOver(true); // End the game if all continents have been used
+      return { correctAnswer: 'Africa', choices: [] }; // Placeholder to trigger game over
+    }
+
+    // Pick a random continent from the remaining ones
+    const correctAnswer = remainingContinents[Math.floor(Math.random() * remainingContinents.length)];
+
+    // Create choices, ensuring the correct answer is included
+    const otherChoices = continents.filter(continent => continent !== correctAnswer);
+    const shuffledOtherChoices = shuffleArray(otherChoices).slice(0, 3); // Pick 3 wrong choices
+
+    const choices = [correctAnswer, ...shuffledOtherChoices]; // Ensure the correct answer is included
+    return {
+      correctAnswer,
+      choices: shuffleArray(choices), // Shuffle the choices
+    };
+  };
 
   // Generate the first question after the component has mounted
   useEffect(() => {
-    setQuestion(generateQuestion());
-  }, []);
+    if (!gameOver) {
+      setQuestion(generateQuestion());
+    }
+  }, [usedContinents, gameOver]);
 
   // Timer countdown
   useEffect(() => {
-    if (timer > 0) {
+    if (timer > 0 && !gameOver) {
       const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
       return () => clearInterval(interval);
     } else {
       handleTimerEnd();
     }
-  }, [timer]);
+  }, [timer, gameOver]);
 
   // Handle the player's answer
   const handleAnswer = (answer: Continent): void => {
     if (answer === question?.correctAnswer) {
       setScore((prev) => prev + 1);
       setMessage('Correct!');
-      setSelectedAnswer(answer);
+    } else {
+      setMessage('Try Again!');
+    }
+    setSelectedAnswer(answer);
+    setUsedContinents((prev) => [...prev, question?.correctAnswer!]); // Mark this continent as used
 
-      setTimeout(() => {
+    // Move to the next question after 2 seconds
+    setTimeout(() => {
+      if (!gameOver) {
         setQuestion(generateQuestion());
         setSelectedAnswer(null);
         setMessage('');
@@ -103,7 +125,7 @@ const MapGame: React.FC = () => {
   }
 
   return (
-    <div className="game">
+    <div className="game bg-blue-500 text-black">
       <h1>Map Game</h1>
       <div className="question">
         <img
@@ -118,14 +140,13 @@ const MapGame: React.FC = () => {
               key={choice}
               onClick={() => handleAnswer(choice)}
               disabled={selectedAnswer !== null}
-              style={{
-                backgroundColor:
-                  selectedAnswer === choice
-                    ? choice === question.correctAnswer
-                      ? 'green'
-                      : 'red'
-                    : 'black',
-              }}
+              className={`${
+                selectedAnswer === choice
+                  ? choice === question.correctAnswer
+                    ? 'bg-green-500'
+                    : 'bg-red-500'
+                  : 'bg-white'
+              } text-black py-2 px-4 rounded`}
             >
               {choice}
             </button>
