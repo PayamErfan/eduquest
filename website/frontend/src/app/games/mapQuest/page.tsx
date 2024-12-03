@@ -87,7 +87,7 @@ const MapGame: React.FC = () => {
   }
 
   return (
-    <div className="game">
+    <div className="game bg-blue-500">
       <h1>Map Game</h1>
       <div className="question">
         <img
@@ -108,7 +108,7 @@ const MapGame: React.FC = () => {
                     ? choice === question.correctAnswer
                       ? 'green'
                       : 'red'
-                    : 'white',
+                    : 'black',
               }}
             >
               {choice}
