@@ -1,0 +1,70 @@
+.Main-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('./images/og level.png');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+.Easy {
+    background-image: url('./images/og level.png');
+}
+  
+.Medium {
+    background-image: url('./images/noir level.png');
+}
+  
+.Hard {
+    background-image: url('./images/biohazard level.png');
+}
+  
+.Final {
+    background-image: url('./images/sunset level.png');
+}
+
+html {
+    font-size: 1vmin;
+}
+
+h1 {
+    font-size: 10rem;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    -webkit-text-stroke: 2px black;
+    padding: 10px;
+}
+
+.select-level {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    border: none;
+    padding: 5px
+}
+
+button {
+    font-size: 3rem;
+    color: white;
+    font-family: 'Arial' sans-serif;
+    font-weight: 700;
+    background-color: #4CAF50; /* Green button */
+    padding: 10px 20px;
+    margin: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 10vw;
+}
+
+button:hover {
+    background-color: darkgreen; /* Slightly darker green for hover effect */
+}
+
+
+button.active {
+    background-color: royalblue; /* Darker green for active button */
+    font-weight: bold; /* Make text bold when active */
+}
