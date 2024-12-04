@@ -1,9 +1,16 @@
-"use client";
+'use client';
 
 import React, { useState, useEffect } from 'react';
 
 // Define the types for the continent images and question
-type Continent = 'Africa' | 'Asia' | 'Europe' | 'NorthAmerica' | 'SouthAmerica' | 'Antarctica' | 'Australia';
+type Continent =
+  | 'Africa'
+  | 'Asia'
+  | 'Europe'
+  | 'NorthAmerica'
+  | 'SouthAmerica'
+  | 'Antarctica'
+  | 'Australia';
 
 interface Question {
   correctAnswer: Continent;
@@ -27,7 +34,15 @@ const shuffleArray = (array: Continent[]): Continent[] => {
 };
 
 const MapGame: React.FC = () => {
-  const continents: Continent[] = ['Africa', 'Asia', 'Europe', 'NorthAmerica', 'SouthAmerica', 'Antarctica', 'Australia'];
+  const continents: Continent[] = [
+    'Africa',
+    'Asia',
+    'Europe',
+    'NorthAmerica',
+    'SouthAmerica',
+    'Antarctica',
+    'Australia',
+  ];
   const [usedContinents, setUsedContinents] = useState<Continent[]>([]); // Track used continents
   const [question, setQuestion] = useState<Question | null>(null); // Current question
   const [selectedAnswer, setSelectedAnswer] = useState<Continent | null>(null);
@@ -39,17 +54,24 @@ const MapGame: React.FC = () => {
   // Generate a random question from remaining continents
   const generateQuestion = (): Question => {
     // Filter out used continents
-    const remainingContinents = continents.filter(continent => !usedContinents.includes(continent));
+    const remainingContinents = continents.filter(
+      (continent) => !usedContinents.includes(continent)
+    );
     if (remainingContinents.length === 0) {
       setGameOver(true); // End the game if all continents have been used
       return { correctAnswer: 'Africa', choices: [] }; // Placeholder to trigger game over
     }
 
     // Pick a random continent from the remaining ones
-    const correctAnswer = remainingContinents[Math.floor(Math.random() * remainingContinents.length)];
+    const correctAnswer =
+      remainingContinents[
+        Math.floor(Math.random() * remainingContinents.length)
+      ];
 
     // Create choices, ensuring the correct answer is included
-    const otherChoices = continents.filter(continent => continent !== correctAnswer);
+    const otherChoices = continents.filter(
+      (continent) => continent !== correctAnswer
+    );
     const shuffledOtherChoices = shuffleArray(otherChoices).slice(0, 3); // Pick 3 wrong choices
 
     const choices = [correctAnswer, ...shuffledOtherChoices]; // Ensure the correct answer is included
@@ -94,17 +116,16 @@ const MapGame: React.FC = () => {
         setSelectedAnswer(null);
         setMessage('');
         setTimer(10);
-      }, 2000);
-      
-    } else {
-      setMessage('Try Again!');
-      setSelectedAnswer(answer);
+      } else {
+        setMessage('Try Again!');
+        setSelectedAnswer(answer);
+      }
+    }, 2000);
 
-      setTimeout(() => {
-        setSelectedAnswer(null);
-        setMessage('');
-      }, 2000);
-    }
+    setTimeout(() => {
+      setSelectedAnswer(null);
+      setMessage('');
+    }, 2000);
   };
 
   const handleTimerEnd = () => {
@@ -122,43 +143,42 @@ const MapGame: React.FC = () => {
   // If the question is still null (loading), show a fallback
   if (!question) {
     return <div>Loading...</div>;
-  }
-
-  return (
-    <div className="game bg-blue-500 text-black">
-      <h1>Map Game</h1>
-      <div className="question">
-        <img
-          src={`/${continentImages[question.correctAnswer]}`}
-          alt={question.correctAnswer}
-          width="400"
-        />
-        <h2>Which continent is this?</h2>
-        <div className="choices">
-          {question.choices.map((choice) => (
-            <button
-              key={choice}
-              onClick={() => handleAnswer(choice)}
-              disabled={selectedAnswer !== null}
-              className={`${
-                selectedAnswer === choice
-                  ? choice === question.correctAnswer
-                    ? 'bg-green-500'
-                    : 'bg-red-500'
-                  : 'bg-white'
-              } text-black py-2 px-4 rounded`}
-            >
-              {choice}
-            </button>
-          ))
-          }
+  } else {
+    return (
+      <div className="game bg-blue-500 text-black">
+        <h1>Map Game</h1>
+        <div className="question">
+          <img
+            src={`/${continentImages[question.correctAnswer]}`}
+            alt={question.correctAnswer}
+            width="400"
+          />
+          <h2>Which continent is this?</h2>
+          <div className="choices">
+            {question.choices.map((choice) => (
+              <button
+                key={choice}
+                onClick={() => handleAnswer(choice)}
+                disabled={selectedAnswer !== null}
+                className={`${
+                  selectedAnswer === choice
+                    ? choice === question.correctAnswer
+                      ? 'bg-green-500'
+                      : 'bg-red-500'
+                    : 'bg-white'
+                } text-black py-2 px-4 rounded`}
+              >
+                {choice}
+              </button>
+            ))}
+          </div>
+          <p>{message}</p>
+          <p>Time left: {timer}s</p>
+          <p>Score: {score}</p>
         </div>
-        <p>{message}</p>
-        <p>Time left: {timer}s</p>
-        <p>Score: {score}</p>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default MapGame;
