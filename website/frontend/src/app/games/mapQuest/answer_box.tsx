@@ -3,17 +3,20 @@ import React from 'react';
 interface AnswerBoxProps {
     text: string,
     isSelected: boolean,
-    onSelect: () => void;
+    onSelect: () => void,
+    className: string;
 }
 
-const AnswerBox: React.FC<AnswerBoxProps> = ({ text, isSelected, onSelect }) => {
+const AnswerBox: React.FC<AnswerBoxProps> = ({ text, isSelected, onSelect, className}) => {
     return (
         <div 
+            className={`answer-box ${className || ''}`}
             style = {{
                 display: "flex",
                 alignItems: "center",
                 cursor: "pointer",
                 marginBottom: "10px",
+                //backgroundColor: isSelected ? "green" : 'transparent',
             }}
             onClick={onSelect}
         >

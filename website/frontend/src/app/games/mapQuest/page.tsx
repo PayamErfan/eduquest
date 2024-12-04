@@ -1,6 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import AnswerBox from './answer_box';
+import './map_game.css';
 
 // Define the types for the continent images and question
 type Continent =
@@ -17,18 +19,16 @@ interface Question {
   choices: Continent[];
 }
 
-// Continent images
 const continentImages: Record<Continent, string> = {
-  Africa: 'mapQuest_images/Continents/Africa.png',
-  Asia: 'mapQuest_images/Continents/Asia.png',
-  Europe: 'mapQuest_images/Continents/Europe.png',
-  NorthAmerica: 'mapQuest_images/Continents/North_America.svg',
-  SouthAmerica: 'mapQuest_images/Continents/South_America.png',
-  Antarctica: 'mapQuest_images/Continents/Antartica.png',
-  Australia: 'mapQuest_images/Continents/Oceania.png',
+  Africa: '/mapQuest_images/Continents/Africa.png',
+  Asia: '/mapQuest_images/Continents/Asia.png',
+  Europe: '/mapQuest_images/Continents/Europe.png',
+  NorthAmerica: '/mapQuest_images/Continents/North_America.svg',
+  SouthAmerica: '/mapQuest_images/Continents/South_America.png',
+  Antarctica: '/mapQuest_images/Continents/Antarctica.png',
+  Australia: '/mapQuest_images/Continents/Oceania.png',
 };
 
-// Shuffle array
 const shuffleArray = (array: Continent[]): Continent[] => {
   return [...array].sort(() => Math.random() - 0.5);
 };
@@ -46,10 +46,10 @@ const MapGame: React.FC = () => {
   const [usedContinents, setUsedContinents] = useState<Continent[]>([]); // Track used continents
   const [question, setQuestion] = useState<Question | null>(null); // Current question
   const [selectedAnswer, setSelectedAnswer] = useState<Continent | null>(null);
-  const [score, setScore] = useState<number>(0);
-  const [message, setMessage] = useState<string>('');
-  const [timer, setTimer] = useState<number>(30);
-  const [gameOver, setGameOver] = useState<boolean>(false); // Track game over status
+  const [score, setScore] = useState(0);
+  const [message, setMessage] = useState('');
+  const [timer, setTimer] = useState(30);
+  const [gameOver, setGameOver] = useState(false);
 
   // Generate a random question from remaining continents
   const generateQuestion = (): Question => {
@@ -58,8 +58,8 @@ const MapGame: React.FC = () => {
       (continent) => !usedContinents.includes(continent)
     );
     if (remainingContinents.length === 0) {
-      setGameOver(true); // End the game if all continents have been used
-      return { correctAnswer: 'Africa', choices: [] }; // Placeholder to trigger game over
+      setGameOver(true);
+      return null;
     }
 
     // Pick a random continent from the remaining ones
@@ -81,40 +81,37 @@ const MapGame: React.FC = () => {
     };
   };
 
-  // Generate the first question after the component has mounted
-  useEffect(() => {
-    if (!gameOver) {
-      setQuestion(generateQuestion());
+  const updateQuestion = () => {
+    const newQuestion = generateQuestion();
+    if (newQuestion) {
+      setQuestion(newQuestion);
     }
-  }, [usedContinents, gameOver]);
+  };
 
-  // Timer countdown
+  useEffect(() => {
+    updateQuestion();
+  }, []);
+
   useEffect(() => {
     if (timer > 0 && !gameOver) {
       const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
       return () => clearInterval(interval);
-    } else {
+    } else if (timer === 0) {
       handleTimerEnd();
     }
   }, [timer, gameOver]);
 
-  // Handle the player's answer
-  const handleAnswer = (answer: Continent): void => {
+  const handleAnswer = (answer: Continent) => {
     if (answer === question?.correctAnswer) {
       setScore((prev) => prev + 1);
       setMessage('Correct!');
-    } else {
-      setMessage('Try Again!');
-    }
-    setSelectedAnswer(answer);
-    setUsedContinents((prev) => [...prev, question?.correctAnswer!]); // Mark this continent as used
+      setSelectedAnswer(answer);
+      setUsedContinents((prev) => [...prev, question.correctAnswer]);
 
-    // Move to the next question after 2 seconds
-    setTimeout(() => {
-      if (!gameOver) {
-        setQuestion(generateQuestion());
+      setTimeout(() => {
         setSelectedAnswer(null);
         setMessage('');
+        updateQuestion();
         setTimer(10);
       } else {
         setMessage('Try Again!');
@@ -129,13 +126,13 @@ const MapGame: React.FC = () => {
   };
 
   const handleTimerEnd = () => {
-    setMessage('Time Out!');
-    setSelectedAnswer(question!.correctAnswer);
+    setMessage('Time is up! Moving to the next question.');
+    setUsedContinents((prev) => [...prev, question!.correctAnswer]);
 
     setTimeout(() => {
-      setQuestion(generateQuestion());
       setSelectedAnswer(null);
       setMessage('');
+      updateQuestion();
       setTimer(10);
     }, 2000);
   };
