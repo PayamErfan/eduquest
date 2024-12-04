@@ -1,0 +1,21 @@
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .correct-answer {
+    border: 2px solid green;
+    background-color: #DFF0D8; 
+  }
+  
+  .incorrect-answer {
+    border: 2px solid red;
+    background-color: #F8D7DA; 
+  }
+  
+  .default-answer {
+    border: 2px solid #ccc;
+    background-color: transparent;
+  }
+  
