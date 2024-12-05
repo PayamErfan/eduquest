@@ -17,7 +17,7 @@ const continentImages: Record<Continent, string> = {
   Europe: '/mapQuest_images/Continents/Europe.png',
   NorthAmerica: '/mapQuest_images/Continents/North_America.svg',
   SouthAmerica: '/mapQuest_images/Continents/South_America.png',
-  Antarctica: '/mapQuest_images/Continents/Antarctica.png',
+  Antarctica: '/mapQuest_images/Continents/Antartica.png',
   Australia: '/mapQuest_images/Continents/Oceania.png',
 };
 
@@ -35,10 +35,12 @@ const MapGame: React.FC = () => {
   const [timer, setTimer] = useState(30);
   const [gameOver, setGameOver] = useState(false);
 
+  
   const generateQuestion = (): Question | null => {
     const remainingContinents = continents.filter(continent => !usedContinents.includes(continent));
     if (remainingContinents.length === 0) {
       setGameOver(true);
+      //handleGameOver();
       return null;
     }
 
@@ -49,6 +51,7 @@ const MapGame: React.FC = () => {
   };
 
   const updateQuestion = () => {
+    if (gameOver) handleGameOver();
     const newQuestion = generateQuestion();
     if (newQuestion) {
       setQuestion(newQuestion);
@@ -93,7 +96,9 @@ const MapGame: React.FC = () => {
   };
 
   const handleTimerEnd = () => {
+    if (gameOver) handleGameOver();
     setMessage('Time is up! Moving to the next question.');
+    setSelectedAnswer(question!.correctAnswer);
     setUsedContinents((prev) => [...prev, question!.correctAnswer]);
 
     setTimeout(() => {
@@ -103,6 +108,18 @@ const MapGame: React.FC = () => {
       setTimer(10);
     }, 2000);
   };
+
+  if(gameOver) {
+    return (
+      <div className="game-over">
+        <h1>Game Over</h1>
+        <p>Final Score: {score}</p>
+        <button onClick={() => window.location.reload()}>Play Again</button>
+      </div>
+    );
+  
+}
+
 
   if (!question) return <div>Loading...</div>;
 
