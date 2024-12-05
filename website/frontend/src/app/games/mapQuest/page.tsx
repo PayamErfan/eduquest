@@ -34,10 +34,14 @@ const MapGame: React.FC = () => {
   const [message, setMessage] = useState('');
   const [timer, setTimer] = useState(30);
   const [gameOver, setGameOver] = useState(false);
+  const [questionUpdating, setQuestionUpdating] = useState(false);
+  const [previousQuestion, setPreviousQuestion] = useState<Question | null>(null);
+
+
 
   
   const generateQuestion = (): Question | null => {
-    const remainingContinents = continents.filter(continent => !usedContinents.includes(continent));
+    const remainingContinents = continents.filter(continent => !usedContinents.includes(continent) && continent !== previousQuestion?.correctAnswer);
     if (remainingContinents.length === 0) {
       setGameOver(true);
       //handleGameOver();
@@ -51,11 +55,14 @@ const MapGame: React.FC = () => {
   };
 
   const updateQuestion = () => {
-    if (gameOver) handleGameOver();
+    if (gameOver || questionUpdating) return; // Prevent multiple updates
+      setQuestionUpdating(true); // Lock updates
     const newQuestion = generateQuestion();
     if (newQuestion) {
-      setQuestion(newQuestion);
+        setQuestion(newQuestion);
+        setPreviousQuestion(newQuestion);
     }
+    setQuestionUpdating(false);
   };
 
   useEffect(() => {
@@ -96,10 +103,11 @@ const MapGame: React.FC = () => {
   };
 
   const handleTimerEnd = () => {
-    if (gameOver) handleGameOver();
+    if (gameOver) return;
     setMessage('Time is up! Moving to the next question.');
     setSelectedAnswer(question!.correctAnswer);
     setUsedContinents((prev) => [...prev, question!.correctAnswer]);
+    
 
     setTimeout(() => {
       setSelectedAnswer(null);
