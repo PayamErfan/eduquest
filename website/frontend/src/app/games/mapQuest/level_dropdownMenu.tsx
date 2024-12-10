@@ -12,9 +12,9 @@ const DropdownMenu: React.FC = () => {
     { label: 'US States', path: '/games/mapQuest/US_States' },
     { label: 'North America', path: '/games/mapQuest/NorthAmerica' },
     { label: 'South America', path: '/games/mapQuest/SouthAmerica' },
-    { label: 'Africa', path: '/games/mapQuest/Africa' },
-    { label: 'Europe', path: '/games/mapQuest/Europe' },
-    { label: 'Asia', path: '/games/mapQuest/Asia' },
+    { label: 'Africa', path: '/games/mapQuest/Countries/Africa' },
+    { label: 'Europe', path: '/games/mapQuest/Countries/Europe' },
+    { label: 'Asia', path: '/games/mapQuest/Countries/Asia' },
     { label: 'Australia', path: '/games/mapQuest/Australia' },
 
   ];
