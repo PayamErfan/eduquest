@@ -25,7 +25,7 @@ const DropdownMenu: React.FC = () => {
 
   const handleSelectItem = (item: { label: string; path:string}) => {
     setSelectedItem(item.label);
-    setIsOpen(false); // Close the dropdown after selecting an item
+    setIsOpen(false); 
     router.push(item.path);
   };
 
@@ -43,7 +43,7 @@ const DropdownMenu: React.FC = () => {
           cursor: 'pointer',
         }}
       >
-        {selectedItem ? selectedItem : 'Select an Item'}
+        {selectedItem ? selectedItem : 'Select a Level!'}
       </button>
 
       {/* Dropdown Menu */}

@@ -10,7 +10,7 @@ export default function MediaCover() {
       <div>
         <Link href="/games/formula_1" passHref>
           {' '}
-          <video className=" w-3/4 h-3/4 absolute left-48 top-32 ">
+          <video className=" w-3/4 h-1/4 absolute left-48 top-32">
             <source src="/formula1/formula.mp4" />
           </video>
         </Link>
@@ -18,8 +18,8 @@ export default function MediaCover() {
       <div>
         <Link href="/games/mapQuest" passHref>
           {' '}
-          <video className=" w-3/4 h-3/4 absolute left-48 top-32 ">
-            <source src="/formula1/formula.mp4" />
+          <video className=" w-3/4 h-1/4 absolute left-48 top-80 ">
+            <source src="spell.mp4" />
           </video>
         </Link>
       </div>
