@@ -14,8 +14,8 @@ export default function MediaCover() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '20px', // Spacing between videos
-          marginTop: '50px', // Space below the Navbar
+          gap: '20px', 
+          marginTop: '50px', 
         }}
       >
         {/* Video Links */}
@@ -35,7 +35,7 @@ export default function MediaCover() {
             style={{ height: '250px', borderRadius: '8px' }}
             controls
           >
-            <source src="spell.mp4" />
+            <source src="/mapQuest_images/mapquest_demo.mp4" />
           </video>
         </Link>
 
