@@ -86,7 +86,7 @@ const EuropeMapGame: React.FC = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<Country | null>(null);
   const [score, setScore] = useState(0);
   const [message, setMessage] = useState('');
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(15);
   const [gameOver, setGameOver] = useState(false);
   const [questionUpdating, setQuestionUpdating] = useState(false);
   const [previousQuestion, setPreviousQuestion] = useState<Question | null>(null);
@@ -143,7 +143,7 @@ const EuropeMapGame: React.FC = () => {
         setSelectedAnswer(null);
         setMessage('');
         updateQuestion();
-        setTimer(10);
+        setTimer(15);
       }, 2000);
     } else {
       setMessage('Try Again!');
@@ -186,33 +186,47 @@ const EuropeMapGame: React.FC = () => {
 
 
   if (!question) return <div>Loading...</div>;
-
+  
   return (
-    <div className="game bg-blue-500 text-black">
-      <h1>Map Game</h1>
-      <div className="question">
-        <img src={countryImages[question.correctAnswer]} alt={question.correctAnswer} width="400" />
-        <h2>Which continent is this?</h2>
-        <div className="grid-container">
-          {question.choices.map((choice, index) => (
-            <AnswerBox
-              key={index}
-              text={choice}
-              isSelected={selectedAnswer === choice}
-              onSelect={() => handleAnswer(choice)}
-              className={
-                selectedAnswer === choice && choice === question.correctAnswer
-                  ? "correct-answer"
-                  : selectedAnswer === choice
-                  ? "incorrect-answer"
-                  : "default-answer"
-              }
-            />
-          ))}
-        </div>
-        <p>{message}</p>
-        <p>Time left: {timer}s</p>
-        <p>Score: {score}</p>
+
+    <div className="game bg-blue-300 text-black min-h-screen flex flex-col items-center justify-center px-8">
+      <h1 className="text-4xl font-bold mb-6 text-white">Map Quest</h1>
+      <div className="text-center mb-8">
+        <img
+          src={countryImages[question.correctAnswer]}
+          alt={question.correctAnswer}
+          className="mx-auto mb-4 rounded-lg"
+          width="400"
+        />
+        <h2 className="text-2xl font-semibold text-white">
+          Which country is this?
+        </h2>
+      </div>
+      <div className="grid grid-cols-2 gap-4 w-full max-w-lg">
+        {question.choices.map((choice, index) => (
+          <AnswerBox
+            key={index}
+            text={choice}
+            isSelected={selectedAnswer === choice}
+            onSelect={() => handleAnswer(choice)}
+            className={
+              selectedAnswer === choice && choice === question.correctAnswer
+                ? "bg-green-100 border-green-500"
+                : selectedAnswer === choice
+                ? "bg-red-100 border-red-500"
+                : "bg-white border-gray-300"
+            }
+          />
+        ))}
+      </div>
+      <p className="text-lg mt-4 text-white">{message}</p>
+      <div className="mt-6 flex flex-col items-center">
+        <p className="text-xl font-medium text-white">
+          Time left: <span className="font-bold">{timer}s</span>
+        </p>
+        <p className="text-xl font-medium text-white">
+          Score: <span className="font-bold">{score}</span>
+        </p>
       </div>
     </div>
   );

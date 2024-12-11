@@ -46,26 +46,26 @@ const StateImages: Record<State, string> = {
     Montana: '/mapQuest_images/US_States/Montana.png',
     Nebraska: '/mapQuest_images/US_States/Nebraska.png',
     Nevada: '/mapQuest_images/US_States/Nevada.png',
-    NewHampshire: '/mapQuest_images/US_States/New_Hampshire.png',
-    NewJersey: '/mapQuest_images/US_States/New_Jersey.png',
-    NewMexico: '/mapQuest_images/US_States/New_Mexico.png',
-    NewYork: '/mapQuest_images/US_States/New_York.png',
-    NorthCarolina: '/mapQuest_images/US_States/North_Carolina.png',
-    NorthDakota: '/mapQuest_images/US_States/North_Dakota.png',
+    NewHampshire: '/mapQuest_images/US_States/New Hampshire.png',
+    NewJersey: '/mapQuest_images/US_States/New Jersey.png',
+    NewMexico: '/mapQuest_images/US_States/New Mexico.png',
+    NewYork: '/mapQuest_images/US_States/New York.png',
+    NorthCarolina: '/mapQuest_images/US_States/North Carolina.png',
+    NorthDakota: '/mapQuest_images/US_States/North Dakota.png',
     Ohio: '/mapQuest_images/US_States/Ohio.png',
     Oklahoma: '/mapQuest_images/US_States/Oklahoma.png',
     Oregon: '/mapQuest_images/US_States/Oregon.png',
     Pennsylvania: '/mapQuest_images/US_States/Pennsylvania.png',
-    RhodeIsland: '/mapQuest_images/US_States/Rhode_Island.png',
-    SouthCarolina: '/mapQuest_images/US_States/South_Carolina.png',
-    SouthDakota: '/mapQuest_images/US_States/South_Dakota.png',
+    RhodeIsland: '/mapQuest_images/US_States/Rhode Island.png',
+    SouthCarolina: '/mapQuest_images/US_States/South Carolina.png',
+    SouthDakota: '/mapQuest_images/US_States/South Dakota.png',
     Tennessee: '/mapQuest_images/US_States/Tennessee.png',
     Texas: '/mapQuest_images/US_States/Texas.png',
     Utah: '/mapQuest_images/US_States/Utah.png',
     Vermont: '/mapQuest_images/US_States/Vermont.png',
     Virginia: '/mapQuest_images/US_States/Virginia.png',
     Washington: '/mapQuest_images/US_States/Washington.png',
-    WestVirginia: '/mapQuest_images/US_States/West_Virginia.png',
+    WestVirginia: '/mapQuest_images/US_States/West Virginia.png',
     Wisconsin: '/mapQuest_images/US_States/Wisconsin.png',
     Wyoming: '/mapQuest_images/US_States/Wyoming.png',
 };
@@ -85,7 +85,7 @@ const StateGame: React.FC = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<State | null>(null);
   const [score, setScore] = useState(0);
   const [message, setMessage] = useState('');
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(15);
   const [gameOver, setGameOver] = useState(false);
   const [questionUpdating, setQuestionUpdating] = useState(false);
   const [previousQuestion, setPreviousQuestion] = useState<Question | null>(null);
@@ -142,7 +142,7 @@ const StateGame: React.FC = () => {
         setSelectedAnswer(null);
         setMessage('');
         updateQuestion();
-        setTimer(10);
+        setTimer(15);
       }, 2000);
     } else {
       setMessage('Try Again!');
@@ -187,12 +187,15 @@ const StateGame: React.FC = () => {
   if (!question) return <div>Loading...</div>;
 
   return (
-    <div className="game bg-blue-500 text-black">
-      <h1>Map Game</h1>
-      <div className="question">
-        <img src={StateImages[question.correctAnswer]} alt={question.correctAnswer} width="400" />
-        <h2>Which state is this?</h2>
-        <div className="grid-container">
+    <div className="game bg-blue-300 text-black min-h-screen flex flex-col items-center justify-center px-8">
+      <h1 className="text-4xl font-bold mb-6 text-white">Map Quest</h1>
+      <div className="text-center mb-8">
+        <img src={StateImages[question.correctAnswer]} 
+        alt={question.correctAnswer} 
+        className="mx-auto mb-4 rounded-lg"
+        width="400" />
+        <h2 className="text-2xl font-semibold text-white">Which state is this?</h2>
+        <div className="grid grid-cols-2 gap-4 w-full max-w-lg">
           {question.choices.map((choice, index) => (
             <AnswerBox
               key={index}
@@ -209,9 +212,15 @@ const StateGame: React.FC = () => {
             />
           ))}
         </div>
-        <p>{message}</p>
-        <p>Time left: {timer}s</p>
-        <p>Score: {score}</p>
+        <p className="text-lg mt-4 text-white">{message}</p>
+        <div className="mt-6 flex flex-col items-center">
+        <p className="text-xl font-medium text-white">
+          Time left: <span className="font-bold">{timer}s</span>
+        </p>
+        <p className="text-xl font-medium text-white">
+          Score: <span className="font-bold">{score}</span>
+        </p>
+        </div>
       </div>
     </div>
   );

@@ -15,12 +15,12 @@ interface Question {
 }
 
 const countryImages: Record<Country, string> = {
-    Belize: '/mapQuest_images/Countries/NorthAmerica/Belize.png',
+  Belize: '/mapQuest_images/Countries/NorthAmerica/Belize.png',
   Canada: '/mapQuest_images/Countries/NorthAmerica/Canada.png',
-  'Costa Rica': '/mapQuest_images/Countries/NorthAmerica/Costa_Rica.png',
+  'Costa Rica': '/mapQuest_images/Countries/NorthAmerica/CostaRica.png',
   Cuba: '/mapQuest_images/Countries/NorthAmerica/Cuba.png',
-  'Dominican Republic': '/mapQuest_images/Countries/NorthAmerica/Dominican_Republic.png',
-  'El Salvador': '/mapQuest_images/Countries/NorthAmerica/El_Salvador.png',
+  'Dominican Republic': '/mapQuest_images/Countries/NorthAmerica/DominicanRepublic.png',
+  'El Salvador': '/mapQuest_images/Countries/NorthAmerica/ElSalvador.png',
   Greenland: '/mapQuest_images/Countries/NorthAmerica/Greenland.png',
   Guatemala: '/mapQuest_images/Countries/NorthAmerica/Guatemala.png',
   Haiti: '/mapQuest_images/Countries/NorthAmerica/Haiti.png',
@@ -29,8 +29,8 @@ const countryImages: Record<Country, string> = {
   Mexico: '/mapQuest_images/Countries/NorthAmerica/Mexico.png',
   Nicaragua: '/mapQuest_images/Countries/NorthAmerica/Nicaragua.png',
   Panama: '/mapQuest_images/Countries/NorthAmerica/Panama.png',
-  'Puerto Rico': '/mapQuest_images/Countries/NorthAmerica/Puerto_Rico.png',
-  'United States': '/mapQuest_images/Countries/NorthAmerica/United_States.png',
+  'Puerto Rico': '/mapQuest_images/Countries/NorthAmerica/PuertoRico.png',
+  'United States': '/mapQuest_images/Countries/NorthAmerica/UnitedStates.png',
 };
 
 const shuffleArray = (array: Country[]): Country[] => {
@@ -46,7 +46,7 @@ const NorthAmericaMapGame: React.FC = () => {
   const [selectedAnswer, setSelectedAnswer] = useState<Country | null>(null);
   const [score, setScore] = useState(0);
   const [message, setMessage] = useState('');
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(15);
   const [gameOver, setGameOver] = useState(false);
   const [questionUpdating, setQuestionUpdating] = useState(false);
   const [previousQuestion, setPreviousQuestion] = useState<Question | null>(null);
@@ -103,7 +103,7 @@ const NorthAmericaMapGame: React.FC = () => {
         setSelectedAnswer(null);
         setMessage('');
         updateQuestion();
-        setTimer(10);
+        setTimer(15);
       }, 2000);
     } else {
       setMessage('Try Again!');
@@ -148,12 +148,18 @@ const NorthAmericaMapGame: React.FC = () => {
   if (!question) return <div>Loading...</div>;
 
   return (
-    <div className="game bg-blue-500 text-black">
-      <h1>Map Game</h1>
-      <div className="question">
-        <img src={countryImages[question.correctAnswer]} alt={question.correctAnswer} width="400" />
-        <h2>Which continent is this?</h2>
-        <div className="grid-container">
+    <div className="game bg-blue-300 text-black min-h-screen flex flex-col items-center justify-center px-8">
+      <h1 className="text-4xl font-bold mb-6 text-white">Map Quest</h1>
+      <div className="text-center mb-8">
+        <img 
+        src={countryImages[question.correctAnswer]} 
+        alt={question.correctAnswer}
+          className="mx-auto mb-4 rounded-lg"
+          width="400"
+        >
+        </img>
+        <h2 className="text-2xl font-semibold text-white">Which country is this?</h2>
+        <div className="grid grid-cols-2 gap-4 w-full max-w-lg">
           {question.choices.map((choice, index) => (
             <AnswerBox
               key={index}
@@ -170,9 +176,15 @@ const NorthAmericaMapGame: React.FC = () => {
             />
           ))}
         </div>
-        <p>{message}</p>
-        <p>Time left: {timer}s</p>
-        <p>Score: {score}</p>
+        <p className="text-lg mt-4 text-white">{message}</p>
+      <div className="mt-6 flex flex-col items-center">
+        <p className="text-xl font-medium text-white">
+          Time left: <span className="font-bold">{timer}s</span>
+        </p>
+        <p className="text-xl font-medium text-white">
+          Score: <span className="font-bold">{score}</span>
+        </p>
+      </div>
       </div>
     </div>
   );
