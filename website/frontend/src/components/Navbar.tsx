@@ -109,6 +109,17 @@ const Navbar = () => {
       Contact
     </Typography>
   </Link>
+  <div>
+            <img
+              src="/images/EduQuest_Logo.png" // Replace with your logo's actual path
+              alt="Logo"
+              style={{
+                width: '100px',
+                height: '100px',
+                objectFit: 'contain',
+              }}
+            />
+  </div>
         
         </Toolbar>
       </AppBar>

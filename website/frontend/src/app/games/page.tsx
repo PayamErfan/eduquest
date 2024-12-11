@@ -5,12 +5,21 @@ import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 export default function MediaCover() {
   return (
-    <div className="realtive  ">
+    <div style = {{
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: "20px",
+      marginTop: "40px",
+    }}>
       <Navbar />
       <div>
         <Link href="/games/formula_1" passHref>
           {' '}
-          <video className=" w-3/4 h-1/4 absolute left-48 top-32">
+          <video 
+            className="w-3/4"
+            style={{ height: '250px', borderRadius: '8px' }}
+            controls>
             <source src="/formula1/formula.mp4" />
           </video>
         </Link>
@@ -18,7 +27,21 @@ export default function MediaCover() {
       <div>
         <Link href="/games/mapQuest" passHref>
           {' '}
-          <video className=" w-3/4 h-1/4 absolute left-48 top-80 ">
+          <video 
+            className="w-3/4"
+            style={{ height: '250px', borderRadius: '8px' }}
+            controls>
+            <source src="spell.mp4" />
+          </video>
+        </Link>
+      </div>
+      <div>
+        <Link href="/games/WordQuest-main" passHref>
+          {' '}
+          <video 
+            className="w-3/4"
+            style={{ height: '250px', borderRadius: '8px' }}
+            controls>
             <source src="spell.mp4" />
           </video>
         </Link>

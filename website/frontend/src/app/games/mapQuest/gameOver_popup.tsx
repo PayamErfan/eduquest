@@ -33,32 +33,36 @@ const GameOverPopup: React.FC<GameOverPopupProps> = ({ score, onPlayAgain }) => 
         GAME OVER
       </h1>
       <p style={{ fontSize: '20px', marginBottom: '24px', color: 'black' }}>Your Final Score: {score}</p>
-      <button
-        onClick={onPlayAgain}
-        style={{
-          padding: '10px 20px',
-          backgroundColor: '#007BFF',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          fontSize: '16px',
-        }}
-      >
-        Play Again
-      </button>
-      <button onClick={goToHome}
-        style ={{
-          padding: '10px 20px',
-          backgroundColor: 'green',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: 'pointer',
-          fontSize: '16px',
-        }}>
-        Go To Home Page
-      </button>
+      <div style = {{display: 'flex', flexDirection:'column', gap: '16px'}}>
+
+      
+        <button
+          onClick={onPlayAgain}
+          style={{
+            padding: '10px 20px',
+            backgroundColor: '#007BFF',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '16px',
+          }}
+        >
+          Play Again
+        </button>
+        <button onClick={goToHome}
+          style ={{
+            padding: '10px 20px',
+            backgroundColor: 'green',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            fontSize: '16px',
+          }}>
+          Go To Home Page
+        </button>
+        </div>
     </div>
   );
 };
