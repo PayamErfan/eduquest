@@ -1,0 +1,177 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import AnswerBox from '../../answer_box';
+import GameOverPopup from '../../gameOver_popup';
+import '../../map_game.css';
+
+
+type Country = 'Argentina'|'Bolivia'|'Brazil'|'Chile'|'Colombia'|'Ecuador'|'French Guiana'|'Guyana'|
+                'Paraguay'|'Peru'|'Suriname'|'Uruguay'|'Venezuela';
+
+interface Question {
+  correctAnswer: Country;
+  choices: Country[];
+}
+
+const countryImages: Record<Country, string> = {
+    Argentina: '/mapQuest_images/Countries/SouthAmerica/Argentina.png',
+    Bolivia: '/mapQuest_images/Countries/SouthAmerica/Bolivia.png',
+    Brazil: '/mapQuest_images/Countries/SouthAmerica/Brazil.png',
+    Chile: '/mapQuest_images/Countries/SouthAmerica/Chile.png',
+    Colombia: '/mapQuest_images/Countries/SouthAmerica/Colombia.png',
+    Ecuador: '/mapQuest_images/Countries/SouthAmerica/Ecuador.png',
+    'French Guiana': '/mapQuest_images/Countries/SouthAmerica/FrenchGuiana.png',
+    Guyana: '/mapQuest_images/Countries/SouthAmerica/Guyana.png',
+    Paraguay: '/mapQuest_images/Countries/SouthAmerica/Paraguay.png',
+    Peru: '/mapQuest_images/Countries/SouthAmerica/Peru.png',
+    Suriname: '/mapQuest_images/Countries/SouthAmerica/Suriname.png',
+    Uruguay: '/mapQuest_images/Countries/SouthAmerica/Uruguay.png',
+    Venezuela: '/mapQuest_images/Countries/SouthAmerica/Venezuela.png',
+};
+
+const shuffleArray = (array: Country[]): Country[] => {
+  return [...array].sort(() => Math.random() - 0.5);
+};
+
+const SouthAmericaMapGame: React.FC = () => {
+  const countries: Country[] = ["Argentina","Bolivia","Brazil","Chile","Colombia","Ecuador",
+    "French Guiana","Guyana","Paraguay","Peru","Suriname","Uruguay","Venezuela"];
+  const [usedCountries, setUsedCountries] = useState<Country[]>([]);
+  const [question, setQuestion] = useState<Question | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<Country | null>(null);
+  const [score, setScore] = useState(0);
+  const [message, setMessage] = useState('');
+  const [timer, setTimer] = useState(30);
+  const [gameOver, setGameOver] = useState(false);
+  const [questionUpdating, setQuestionUpdating] = useState(false);
+  const [previousQuestion, setPreviousQuestion] = useState<Question | null>(null);
+
+
+
+  
+  const generateQuestion = (): Question | null => {
+    const remainingCountries = countries.filter(country => !usedCountries.includes(country) && country !== previousQuestion?.correctAnswer);
+    if (remainingCountries.length === 0) {
+      setGameOver(true);
+      //handleGameOver();
+      return null;
+    }
+
+    const correctAnswer = remainingCountries[Math.floor(Math.random() * remainingCountries.length)];
+    const otherChoices = countries.filter(country => country !== correctAnswer);
+    const shuffledChoices = shuffleArray([correctAnswer, ...otherChoices.slice(0, 3)]);
+    return { correctAnswer, choices: shuffledChoices };
+  };
+
+  const updateQuestion = () => {
+    if (gameOver || questionUpdating) return; // Prevent multiple updates
+      setQuestionUpdating(true); // Lock updates
+    const newQuestion = generateQuestion();
+    if (newQuestion) {
+        setQuestion(newQuestion);
+        setPreviousQuestion(newQuestion);
+    }
+    setQuestionUpdating(false);
+  };
+
+  useEffect(() => {
+    updateQuestion();
+  }, []);
+
+  useEffect(() => {
+    if (timer > 0 && !gameOver) {
+      const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+      return () => clearInterval(interval);
+    } else if (timer === 0) {
+      handleTimerEnd();
+    }
+  }, [timer, gameOver]);
+
+  const handleAnswer = (answer: Country) => {
+    if (answer === question?.correctAnswer) {
+      setScore((prev) => prev + 1);
+      setMessage('Correct!');
+      setSelectedAnswer(answer);
+      setUsedCountries((prev) => [...prev, question.correctAnswer]);
+
+      setTimeout(() => {
+        setSelectedAnswer(null);
+        setMessage('');
+        updateQuestion();
+        setTimer(10);
+      }, 2000);
+    } else {
+      setMessage('Try Again!');
+      setSelectedAnswer(answer);
+
+      setTimeout(() => {
+        setSelectedAnswer(null);
+        setMessage('');
+      }, 2000);
+    }
+  };
+
+  const handleTimerEnd = () => {
+    if (gameOver) return;
+    setMessage('Time is up! Moving to the next question.');
+    setSelectedAnswer(question!.correctAnswer);
+    setUsedCountries((prev) => [...prev, question!.correctAnswer]);
+    
+
+    setTimeout(() => {
+      setSelectedAnswer(null);
+      setMessage('');
+      updateQuestion();
+      setTimer(10);
+    }, 2000);
+  };
+
+  //This is what happens when the game is over
+  if(gameOver) {
+    return (
+      <div>
+      <GameOverPopup
+        score={score}
+        onPlayAgain={() => window.location.reload()}
+      />
+    </div>
+    );
+  
+}
+
+
+  if (!question) return <div>Loading...</div>;
+
+  return (
+    <div className="game bg-blue-500 text-black">
+      <h1>Map Game</h1>
+      <div className="question">
+        <img src={countryImages[question.correctAnswer]} alt={question.correctAnswer} width="400" />
+        <h2>Which continent is this?</h2>
+        <div className="grid-container">
+          {question.choices.map((choice, index) => (
+            <AnswerBox
+              key={index}
+              text={choice}
+              isSelected={selectedAnswer === choice}
+              onSelect={() => handleAnswer(choice)}
+              className={
+                selectedAnswer === choice && choice === question.correctAnswer
+                  ? "correct-answer"
+                  : selectedAnswer === choice
+                  ? "incorrect-answer"
+                  : "default-answer"
+              }
+            />
+          ))}
+        </div>
+        <p>{message}</p>
+        <p>Time left: {timer}s</p>
+        <p>Score: {score}</p>
+      </div>
+    </div>
+  );
+};
+
+export default SouthAmericaMapGame;

@@ -1,0 +1,181 @@
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import AnswerBox from '../../answer_box';
+import GameOverPopup from '../../gameOver_popup';
+import '../../map_game.css';
+
+
+type Country = 'Belize'|'Canada'|'Costa Rica'|'Cuba'|'Dominican Republic'|'El Salvador'|'Greenland'|
+'Guatemala'|'Haiti'|'Honduras'|'Jamaica'|'Mexico'|'Nicaragua'|'Panama'|'Puerto Rico'|'United States';
+
+interface Question {
+  correctAnswer: Country;
+  choices: Country[];
+}
+
+const countryImages: Record<Country, string> = {
+    Belize: '/mapQuest_images/Countries/NorthAmerica/Belize.png',
+  Canada: '/mapQuest_images/Countries/NorthAmerica/Canada.png',
+  'Costa Rica': '/mapQuest_images/Countries/NorthAmerica/Costa_Rica.png',
+  Cuba: '/mapQuest_images/Countries/NorthAmerica/Cuba.png',
+  'Dominican Republic': '/mapQuest_images/Countries/NorthAmerica/Dominican_Republic.png',
+  'El Salvador': '/mapQuest_images/Countries/NorthAmerica/El_Salvador.png',
+  Greenland: '/mapQuest_images/Countries/NorthAmerica/Greenland.png',
+  Guatemala: '/mapQuest_images/Countries/NorthAmerica/Guatemala.png',
+  Haiti: '/mapQuest_images/Countries/NorthAmerica/Haiti.png',
+  Honduras: '/mapQuest_images/Countries/NorthAmerica/Honduras.png',
+  Jamaica: '/mapQuest_images/Countries/NorthAmerica/Jamaica.png',
+  Mexico: '/mapQuest_images/Countries/NorthAmerica/Mexico.png',
+  Nicaragua: '/mapQuest_images/Countries/NorthAmerica/Nicaragua.png',
+  Panama: '/mapQuest_images/Countries/NorthAmerica/Panama.png',
+  'Puerto Rico': '/mapQuest_images/Countries/NorthAmerica/Puerto_Rico.png',
+  'United States': '/mapQuest_images/Countries/NorthAmerica/United_States.png',
+};
+
+const shuffleArray = (array: Country[]): Country[] => {
+  return [...array].sort(() => Math.random() - 0.5);
+};
+
+const NorthAmericaMapGame: React.FC = () => {
+  const countries: Country[] = ["Belize", "Canada", "Costa Rica", "Cuba",
+    "Dominican Republic", "El Salvador", "Greenland", "Guatemala","Haiti", "Honduras", "Jamaica", "Mexico",
+    "Nicaragua", "Panama", "Puerto Rico", "United States"];
+  const [usedCountries, setUsedCountries] = useState<Country[]>([]);
+  const [question, setQuestion] = useState<Question | null>(null);
+  const [selectedAnswer, setSelectedAnswer] = useState<Country | null>(null);
+  const [score, setScore] = useState(0);
+  const [message, setMessage] = useState('');
+  const [timer, setTimer] = useState(30);
+  const [gameOver, setGameOver] = useState(false);
+  const [questionUpdating, setQuestionUpdating] = useState(false);
+  const [previousQuestion, setPreviousQuestion] = useState<Question | null>(null);
+
+
+
+  
+  const generateQuestion = (): Question | null => {
+    const remainingCountries = countries.filter(country => !usedCountries.includes(country) && country !== previousQuestion?.correctAnswer);
+    if (remainingCountries.length === 0) {
+      setGameOver(true);
+      //handleGameOver();
+      return null;
+    }
+
+    const correctAnswer = remainingCountries[Math.floor(Math.random() * remainingCountries.length)];
+    const otherChoices = countries.filter(country => country !== correctAnswer);
+    const shuffledChoices = shuffleArray([correctAnswer, ...otherChoices.slice(0, 3)]);
+    return { correctAnswer, choices: shuffledChoices };
+  };
+
+  const updateQuestion = () => {
+    if (gameOver || questionUpdating) return; // Prevent multiple updates
+      setQuestionUpdating(true); // Lock updates
+    const newQuestion = generateQuestion();
+    if (newQuestion) {
+        setQuestion(newQuestion);
+        setPreviousQuestion(newQuestion);
+    }
+    setQuestionUpdating(false);
+  };
+
+  useEffect(() => {
+    updateQuestion();
+  }, []);
+
+  useEffect(() => {
+    if (timer > 0 && !gameOver) {
+      const interval = setInterval(() => setTimer((prev) => prev - 1), 1000);
+      return () => clearInterval(interval);
+    } else if (timer === 0) {
+      handleTimerEnd();
+    }
+  }, [timer, gameOver]);
+
+  const handleAnswer = (answer: Country) => {
+    if (answer === question?.correctAnswer) {
+      setScore((prev) => prev + 1);
+      setMessage('Correct!');
+      setSelectedAnswer(answer);
+      setUsedCountries((prev) => [...prev, question.correctAnswer]);
+
+      setTimeout(() => {
+        setSelectedAnswer(null);
+        setMessage('');
+        updateQuestion();
+        setTimer(10);
+      }, 2000);
+    } else {
+      setMessage('Try Again!');
+      setSelectedAnswer(answer);
+
+      setTimeout(() => {
+        setSelectedAnswer(null);
+        setMessage('');
+      }, 2000);
+    }
+  };
+
+  const handleTimerEnd = () => {
+    if (gameOver) return;
+    setMessage('Time is up! Moving to the next question.');
+    setSelectedAnswer(question!.correctAnswer);
+    setUsedCountries((prev) => [...prev, question!.correctAnswer]);
+    
+
+    setTimeout(() => {
+      setSelectedAnswer(null);
+      setMessage('');
+      updateQuestion();
+      setTimer(10);
+    }, 2000);
+  };
+
+  //This is what happens when the game is over
+  if(gameOver) {
+    return (
+      <div>
+      <GameOverPopup
+        score={score}
+        onPlayAgain={() => window.location.reload()}
+      />
+    </div>
+    );
+  
+}
+
+
+  if (!question) return <div>Loading...</div>;
+
+  return (
+    <div className="game bg-blue-500 text-black">
+      <h1>Map Game</h1>
+      <div className="question">
+        <img src={countryImages[question.correctAnswer]} alt={question.correctAnswer} width="400" />
+        <h2>Which continent is this?</h2>
+        <div className="grid-container">
+          {question.choices.map((choice, index) => (
+            <AnswerBox
+              key={index}
+              text={choice}
+              isSelected={selectedAnswer === choice}
+              onSelect={() => handleAnswer(choice)}
+              className={
+                selectedAnswer === choice && choice === question.correctAnswer
+                  ? "correct-answer"
+                  : selectedAnswer === choice
+                  ? "incorrect-answer"
+                  : "default-answer"
+              }
+            />
+          ))}
+        </div>
+        <p>{message}</p>
+        <p>Time left: {timer}s</p>
+        <p>Score: {score}</p>
+      </div>
+    </div>
+  );
+};
+
+export default NorthAmericaMapGame;
