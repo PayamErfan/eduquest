@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRouter } from "next/navigation";
 
 interface GameOverPopupProps {
   score: number;
@@ -6,6 +7,12 @@ interface GameOverPopupProps {
 }
 
 const GameOverPopup: React.FC<GameOverPopupProps> = ({ score, onPlayAgain }) => {
+  const router = useRouter();
+
+  const goToHome = () => {
+    router.push('/games/mapQuest'); // Navigates to the homepage
+  };
+
   return (
     <div
       style={{
@@ -39,6 +46,18 @@ const GameOverPopup: React.FC<GameOverPopupProps> = ({ score, onPlayAgain }) => 
         }}
       >
         Play Again
+      </button>
+      <button onClick={goToHome}
+        style ={{
+          padding: '10px 20px',
+          backgroundColor: 'green',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer',
+          fontSize: '16px',
+        }}>
+        Go To Home Page
       </button>
     </div>
   );
