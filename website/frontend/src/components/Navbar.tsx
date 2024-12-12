@@ -96,7 +96,7 @@ const Navbar = () => {
       Games
     </Typography>
   </Link>
-  <Link href="/" passHref>
+  <Link href="/contact" passHref>
     <Typography
       color="black"
       variant="h6"
