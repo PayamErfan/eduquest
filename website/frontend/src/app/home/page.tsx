@@ -54,56 +54,6 @@ const Home = () => {
           />
         </div>
       </div>
-      <div className="flex flex-wrap items-center justify-around p-5 rounded-lg">
-        <a 
-          href="https://placeholder.com" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-[450px] h-[300px] p-5"
-        >
-          <img 
-            src="/images/placeholder.jpg" 
-            alt="Background" 
-            className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-black hover:bg-opacity-30"
-          />
-        </a>
-        <a 
-          href="https://placeholder.com" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-[450px] h-[300px] p-5"
-        >
-          <img 
-            src="/images/placeholder.jpg" 
-            alt="Background" 
-            className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-black hover:bg-opacity-30"
-          />
-        </a>
-        <a 
-          href="https://placeholder.com" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-[450px] h-[300px] p-5"
-        >
-          <img 
-            src="/images/placeholder.jpg" 
-            alt="Background" 
-            className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-black hover:bg-opacity-30"
-          />
-        </a>
-        <a 
-          href="https://placeholder.com" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          className="w-[450px] h-[300px] p-5"
-        >
-          <img 
-            src="/images/placeholder.jpg" 
-            alt="Background" 
-            className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-black hover:bg-opacity-30"
-          />
-        </a>
-      </div>
       <Footer />
     </div>
   );

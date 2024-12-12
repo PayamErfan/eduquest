@@ -95,7 +95,6 @@ const EuropeMapGame: React.FC = () => {
   const [previousQuestion, setPreviousQuestion] = useState<Question | null>(null);
 
 
-
   
   const generateQuestion = (): Question | null => {
     const remainingCountries = countries.filter(country => !usedCountries.includes(country) && country !== previousQuestion?.correctAnswer);
