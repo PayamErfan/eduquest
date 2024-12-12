@@ -14,8 +14,8 @@ export default function MediaCover() {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
-          gap: '20px', 
-          marginTop: '50px', 
+          gap: '20px',
+          marginTop: '50px',
         }}
       >
         {/* Video Links */}
@@ -38,14 +38,12 @@ export default function MediaCover() {
             <source src="/mapQuest_images/mapquest_demo.mp4" />
           </video>
         </Link>
-
-        <Link href="/games/WordQuest-main" passHref>
+        <Link href="/games/wordQuest">
           <video
             className="w-3/4"
             style={{ height: '250px', borderRadius: '8px' }}
-            controls
           >
-            <source src="spell.mp4" />
+            <source src="/spell.mp4"></source>
           </video>
         </Link>
       </div>

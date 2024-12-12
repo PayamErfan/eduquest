@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import Navbar from '@/components/Navbar';
 import Title from '@/components/Title';
@@ -20,29 +20,51 @@ const Home = () => {
             whiteSpace: 'nowrap',
           }}
         >
-          <span className="mx-8">Providing Education for All Through Games!</span>
-          <span className="mx-8">Providing Education for All Through Games!</span>
-          <span className="mx-8">Providing Education for All Through Games!</span>
-          <span className="mx-8">Providing Education for All Through Games!</span>
-          <span className="mx-8">Providing Education for All Through Games!</span>
-          <span className="mx-8">Providing Education for All Through Games!</span>
+          <span className="mx-8">
+            Providing Education for All Through Games!
+          </span>
+          <span className="mx-8">
+            Providing Education for All Through Games!
+          </span>
+          <span className="mx-8">
+            Providing Education for All Through Games!
+          </span>
+          <span className="mx-8">
+            Providing Education for All Through Games!
+          </span>
+          <span className="mx-8">
+            Providing Education for All Through Games!
+          </span>
+          <span className="mx-8">
+            Providing Education for All Through Games!
+          </span>
         </div>
       </div>
       <Title />
-      <div id="target-section" style={{ display: 'flex', alignItems: 'center', paddingTop: '100px'}}>
-        <div style={{
-          paddingLeft: '150px', 
-          paddingRight: '150px',
-          textAlign: 'center',
-        }}>
-          <div style={{
-            color: 'black',
-            fontSize: '25px',
-            paddingBottom: '20px',
-            fontWeight: 'normal',
+      <div
+        id="target-section"
+        style={{ display: 'flex', alignItems: 'center', paddingTop: '100px' }}
+      >
+        <div
+          style={{
+            paddingLeft: '150px',
+            paddingRight: '150px',
             textAlign: 'center',
-          }}>
-            Unlock the joy of learning with EduQuest! Our platform brings education to life through interactive games that make knowledge accessible and fun for everyone. Join us in transforming learning into an adventure!
+          }}
+        >
+          <div
+            style={{
+              color: 'black',
+              fontSize: '25px',
+              paddingBottom: '20px',
+              fontWeight: 'normal',
+              textAlign: 'center',
+            }}
+          >
+            Unlock the joy of learning with EduQuest! Our platform brings
+            education to life through interactive games that make knowledge
+            accessible and fun for everyone. Join us in transforming learning
+            into an adventure!
           </div>
           <Button />
         </div>
@@ -55,51 +77,51 @@ const Home = () => {
         </div>
       </div>
       <div className="flex flex-wrap items-center justify-around p-5 rounded-lg">
-        <a 
-          href="https://placeholder.com" 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        <a
+          href="https://placeholder.com"
+          target="_blank"
+          rel="noopener noreferrer"
           className="w-[450px] h-[300px] p-5"
         >
-          <img 
-            src="/images/placeholder.jpg" 
-            alt="Background" 
+          <img
+            src="/images/placeholder.jpg"
+            alt="Background"
             className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-black hover:bg-opacity-30"
           />
         </a>
-        <a 
-          href="https://placeholder.com" 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        <a
+          href="https://placeholder.com"
+          target="_blank"
+          rel="noopener noreferrer"
           className="w-[450px] h-[300px] p-5"
         >
-          <img 
-            src="/images/placeholder.jpg" 
-            alt="Background" 
+          <img
+            src="/images/placeholder.jpg"
+            alt="Background"
             className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-black hover:bg-opacity-30"
           />
         </a>
-        <a 
-          href="https://placeholder.com" 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        <a
+          href="https://placeholder.com"
+          target="_blank"
+          rel="noopener noreferrer"
           className="w-[450px] h-[300px] p-5"
         >
-          <img 
-            src="/images/placeholder.jpg" 
-            alt="Background" 
+          <img
+            src="/images/placeholder.jpg"
+            alt="Background"
             className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-black hover:bg-opacity-30"
           />
         </a>
-        <a 
-          href="https://placeholder.com" 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        <a
+          href="https://placeholder.com"
+          target="_blank"
+          rel="noopener noreferrer"
           className="w-[450px] h-[300px] p-5"
         >
-          <img 
-            src="/images/placeholder.jpg" 
-            alt="Background" 
+          <img
+            src="/images/placeholder.jpg"
+            alt="Background"
             className="w-full h-full rounded-lg transition-transform duration-300 ease-in-out transform hover:scale-105 hover:bg-black hover:bg-opacity-30"
           />
         </a>
