@@ -191,7 +191,7 @@ const EuropeMapGame: React.FC = () => {
   if (!question) return <div>Loading...</div>;
 
   return (
-    <div className="game bg-blue-200 text-black min-h-screen flex flex-col items-center justify-center px-8">
+    <div className="game bg-green-300 text-black min-h-screen flex flex-col items-center justify-center px-8">
     <h1 className="text-4xl font-bold mb-6 text-white">Map Quest</h1>
     <div className="text-center mb-8">
       <img
