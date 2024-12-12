@@ -38,16 +38,6 @@ export default function MediaCover() {
             <source src="/mapQuest_images/mapquest_demo.mp4" />
           </video>
         </Link>
-
-        <Link href="/games/WordQuest-main" passHref>
-          <video
-            className="w-3/4"
-            style={{ height: '250px', borderRadius: '8px' }}
-            controls
-          >
-            <source src="spell.mp4" />
-          </video>
-        </Link>
       </div>
     </div>
   );
