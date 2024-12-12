@@ -1,0 +1,161 @@
+/* C:\Users\turno\OneDrive\Documents\new game react\crossword-game\src\components\styles.css */
+/* Add this to your CSS file */
+
+
+.hint p {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.cell {
+  text-align: center;
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+.cell:focus {
+  border: 2px solid #4f46e5;
+}
+
+.random-background {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+}
+.crossword-board {
+  display: grid;
+  gap: 0;
+  margin: 20px auto;
+}
+
+
+
+li.line-through {
+  text-decoration: line-through;
+}
+
+.feedback {
+  color: green;
+  font-weight: bold;
+  margin-top: 20px;
+}
+.cell:focus {
+  outline: none;
+  border: 2px solid #4f46e5; /* Focus effect */
+}
+
+h3 {
+  font-size: 1.5em; /* Slightly smaller than h2 */
+  color: #34495e; /* Dark blue-gray color */
+  font-weight: bold; /* Bold text for emphasis */
+  text-align: left; /* Center the text */
+  margin: 10px 0; /* Add spacing */
+  background-color: rgba(100, 149, 237, 0.1); /* Light blue background */
+  padding: 10px; /* Padding for better spacing */
+  border-radius: 5px; /* Rounded corners */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  font-size: 1em;
+  margin: 5px 0;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #d9d9d9;
+}
+
+h1 {
+  font-size: 2em;
+  color: #333;
+}
+
+h2 {
+  font-size: 2em; /* Larger size for better visibility */
+  color: #2c3e50; /* Darker, more distinct color */
+  font-weight: bold; /* Make it bold */
+  text-align: left; /* Center the text */
+  margin: 20px 0; /* Add spacing around the header */
+  border-bottom: 2px solid #4f46e5; /* Optional border for emphasis */
+  padding-bottom: 5px; /* Space between text and border */
+}
+
+h4 {
+  color: white;  /* White text color */
+  font-size: 48px;
+  font-weight: bold;
+  border: 2px solid black;  /* Black border */
+  padding: 10px;  /* Space between text and border */
+}
+
+.crossword-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.crossword-board-container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hint-panel {
+  flex: 1;
+  max-width: 300px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-left: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hint {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.hint:last-child {
+  border-bottom: none;
+}
+
+.hint-button {
+  background: #3b82f6;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.hint-button:disabled {
+  background: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+}

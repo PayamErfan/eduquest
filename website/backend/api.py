@@ -19,6 +19,8 @@ app.add_middleware(
 class formula_1(BaseModel):
     question: str
 # API endpoint to get the current question
+class wordQuest(BaseModel):
+    word: str
 load_dotenv()
 
 
@@ -33,7 +35,16 @@ async def game_formula1(question: formula_1):
     with open(audioFile, 'wb') as f:
         f.write(synthesis['audio'])
     return FileResponse(audioFile)    
-    
+@app.post('/wordQuest')
+async def wordQuest_game(text: wordQuest):
+    lmntKey = os.getenv('LMNT_API_KEY')
+    text = text.word
+    async with Speech(api_key=lmntKey) as speech:
+        systhesis = await speech.synthesize(text, 'lily')
+    audioFile = f'words.mp3'
+    with open(audioFile, 'wb' ) as f:
+        f.write(systhesis['audio'])
+    return FileResponse(audioFile)
 
 @app.post('/spelling_bee')
 async def spelling():
