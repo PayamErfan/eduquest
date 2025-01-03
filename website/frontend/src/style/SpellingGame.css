@@ -1,0 +1,218 @@
+.SpellingBee {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('./images/og level.png');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    font-size: 2rem;
+}
+
+.MainMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('./images/og level.png');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+html {
+    font-size: 1vmin;
+}
+
+.Easy {
+    background-image: url('./images/og level.png');
+}
+  
+.Medium {
+    background-image: url('./images/noir level.png');
+}
+  
+.Hard {
+    background-image: url('./images/biohazard level.png');
+}
+  
+.Final {
+    background-image: url('./images/sunset level.png');
+}
+
+#game-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: url('./images/og level.png');
+    background-size: 400%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    transition: background-position 0.5s ease;
+}
+
+#game-container.Easy {
+    background-image: url('./images/og level.png');
+}
+
+#game-container.Medium {
+    background-image: url('./images/noir level.png');
+}
+
+#game-container.Hard {
+    background-image: url('./images/biohazard level.png');
+}
+
+#game-container.Final {
+    background-image: url('./images/sunset level.png');
+}
+
+#Moski {
+    position: absolute;  /* Ensure it moves correctly with top and left */
+    width: 300px;  /* Adjust based on your character size */
+    height: auto;
+    bottom: 0.2rem;  /* Initial position */
+    left: 20rem;  /* Initial position */
+    transition: transform 0.3s ease; /* Smooth transitions */
+}
+
+
+
+
+
+.Plain-text {
+    text-align: center;
+    align-items: center;
+    font-weight: 2000;
+    color: white;
+    /* -webkit-text-stroke: 0.5px black;
+    padding: 5px; */
+}
+
+.Plain-text.Hard {
+    color:black;
+}
+
+.Plain-text.Final {
+    color:white;
+    -webkit-text-stroke: 0.5px black;
+    padding: 5px;
+}
+
+
+
+input {
+    width: 30%;
+    height: 5rem;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    font-size: 4rem;
+    font-family: 'Arial', sans-serif;
+    resize: none;
+    position: absolute;
+    bottom: 30rem;
+    text-align: center;
+}
+
+.sentence {
+    text-align: center;
+    position: absolute;
+    top: 30rem;
+    left: 55rem; 
+}
+
+.text {
+    position: absolute;
+    text-align: center;
+    top: 40rem;
+    left: 80rem;
+}
+
+.lives {
+    position: absolute;
+    bottom: 15rem;
+    right: 15rem;
+}
+
+.level {
+    position: absolute;
+    top: 5rem;
+    right: 15rem;
+}
+
+.points {
+    position: absolute;
+    bottom: 15rem;
+    left: 20rem;
+}
+
+button {
+    font-size: 3rem;
+    color: white;
+    font-family: 'Arial' sans-serif;
+    font-weight: 700;
+    background-color: #4CAF50; /* Green button */
+    padding: 10px 20px;
+    margin: 2rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 10vw;
+}
+
+button.restart {
+    position: absolute;
+    left: 15rem;
+    top: 5rem;
+}
+
+button.word {
+    position: absolute;
+    left: 15rem;
+    top: 30rem;
+}
+
+button.sentence {
+    position: absolute;
+    left: 15rem;
+    top: 45rem;
+}
+
+button.next-word {
+    position: absolute;
+    left: 15rem;
+    top: 60rem;
+}
+
+button.next-level {
+    position: absolute;
+    top: 30rem;
+    right: 15rem;
+
+}
+
+button.finish-main {
+    position: absolute;
+    top: 45rem;
+    right: 15rem;
+
+}
+
+button:hover {
+    background-color: darkgreen; /* Slightly darker green for hover effect */
+}
+
+
+button.active {
+    background-color: royalblue; /* Darker green for active button */
+    font-weight: bold; /* Make text bold when active */
+}
+

@@ -1,124 +1,77 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom'; // For routing
 import '../style/MainMenu.css';
 import styled from 'styled-components';
 import { importCSV } from '../utils/CsvImporter';
 import { randomWordGenerator } from '../utils/WordsGenerator';
+import { playBGM } from '../utils/SoundPlayer';
+import Instruction from '../components/Instruction';
 
-//onStartGame & onLevelChange changes the game status in Game.js and select the right level
-const levels = ["Easy", "Medium", "Hard", "Final"];
+const levels = ['Easy', 'Medium', 'Hard', 'Final'];
 
-const MainMenu = ({ onStartGame, onLevelChange}) => {
-    const [level, setLevel] = useState('Easy');
-    const [active, setActive] = useState(levels[0]);
-    const [words, setWords] = useState([]);
-    const [wordList, setWordList] = useState([]);
+const MainMenu = ({ onStartGame, onLevelChange, onWordListChange }) => {
+  const [level, setLevel] = useState(null); // No default selection
+  const [active, setActive] = useState(null);
+  const [words, setWords] = useState([]);
+  const [wordList, setWordList] = useState([]);
+  const [showInstructions, setShowInstructions] = useState(false);
 
-    const handleStartGame = () => {
-        onStartGame(true); // This will be passed from App.js to set the game state to 'started'
-        onLevelChange(level); // Pass the selected level to the game component
-    };
+  const handleInstruction = () => {
+    setShowInstructions(true);
+  };
 
-    const wordFile = (level) => {
-        const csvName = `/assets/words/OP EduQuest Spelling Game Word Bank - 850${level}.csv`;
-        setWords(importCSV(csvName));
-    }
+  const handleCloseInstructions = () => {
+    setShowInstructions(false);
+  };
 
+  const handleStartGame = () => {
+    onStartGame(true, wordList); // Set game state to "started"
+    onLevelChange(level); // Pass the selected level to the game component
+    playBGM();
+  };
 
-    const handleInstruction = () => {
-        alert("Instructions will go here!");
-    };
+  const handleLevelSelect = async (selectedLevel) => {
+    setActive(selectedLevel);
+    setLevel(selectedLevel);
 
-    // const handleBackground = (level) => {
-    //     let backgroundUrl = '';
-    //     if (level == "Easy"){
-    //         backgroundUrl = '/assets/images/og level.png';
-    //     } else if (level == "Medium") {
-    //         backgroundUrl = '/assets/images/noir level.png';
-    //     } else if (level == "Hard") {
-    //         backgroundUrl = '/assets/images/biohazard level.png';
-    //     } else if (level == "Final") {
-    //         backgroundUrl = '/assets/images/sunset level.png';
-    //     }
+    const wordFile = `/assets/words/OP EduQuest Spelling Game Word Bank - 850${selectedLevel}.csv`;
+    const importedWords = await importCSV(wordFile); // Load word list
+    setWords(importedWords);
 
-    //     document.body.style.backgroundImage = `url(${backgroundUrl})`;
-    //     document.body.style.backgroundSize = 'cover';
-    //     document.body.style.backgroundPosition = 'center'; 
-    // };
+    const randomWordList = randomWordGenerator(importedWords);
+    setWordList(randomWordList);
+    onWordListChange(randomWordList); // Update parent with word list
+  };
 
-    const handleLevelSelect = async (level) => {
-        setActive(level);
-        setLevel(level);
-        // setLoading(true);
-        // setError(null);
-        const wordFile = `/assets/words/OP EduQuest Spelling Game Word Bank - 850${level}.csv`;
-        const importedwords = await importCSV(wordFile);  // Wait for CSV import
-        setWords(importedwords);      // Update state with new words
-        setWordList(randomWordGenerator(importedwords));
-        
-        console.log("Generated wordList in MainMenu:", wordList);
-        //handleBackground(level);
-    };
+  return (
+    <div className="Main-menu">
+      <h1>Moski's Spelling Adventure</h1>
 
-    
+      {/* Conditional rendering for "Select Level" or "Start" button */}
+      {!level ? (
+        <p className="select-level-text">Select Level</p>
+      ) : (
+        <button onClick={handleStartGame}>Start</button>
+      )}
 
-    
+      <div className="select-level">
+        {levels.map((lvl) => (
+          <button
+            key={lvl}
+            className={active === lvl ? 'active' : ''}
+            onClick={() => handleLevelSelect(lvl)}
+          >
+            {lvl}
+          </button>
+        ))}
+      </div>
 
-    return (
-        <div className={`Main-menu ${level}`}>
-            <h1>Moski's Spelling Adventure</h1>
+      <button onClick={handleInstruction}>How to Play</button>
 
-            <button onClick={handleStartGame}>
-                Start
-            </button>
-
-            <div className="select-level">
-                {levels.map((level) => (
-                    <button
-                        key={level}
-                        className={active === level ? 'active' : ''}
-                        onClick={() => handleLevelSelect(level)}
-                    >
-                        {level}
-                    </button>
-                ))}
-
-
-            </div>
-
-
-            <div>
-                {console.log("wordList before rendering in MainMenu:", wordList)}
-                <h2>Words for {level} Level</h2>
-                <ul>
-                    {wordList.length > 0 ? (
-                        wordList.map((wordPair, index) => (
-                        <li key={index}>
-                            {wordPair.word}: {wordPair.sentence}
-                        </li>
-                        ))
-                    ) : (
-                    <li>No words available</li> // If wordList is empty, display a message.
-                    )}
-                </ul>
-            </div>
-
-
-            
-            {/* <button onClick={handleExit}>
-                Exit Game
-            </button> 
-            maybe we dont need exit buttong since it will be a webpage game, 
-            exitgamehandler will simple set onStartGame(false)*/}
-
-            <button onClick={handleInstruction}>
-                How to Play
-            </button>
-        </div>
-    );
+      {/* Instruction Modal */}
+      <Instruction show={showInstructions} onClose={handleCloseInstructions} />
+    </div>
+  );
 };
 
 export default MainMenu;
-
-
-

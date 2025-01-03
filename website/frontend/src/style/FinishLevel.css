@@ -1,0 +1,76 @@
+.title-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('./images/og level.png');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+.finish-level-screen {
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    background-image: url('./images/og level.png');
+}
+
+
+.Main-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url('./images/og level.png');
+    background-size: cover;
+    background-position: center;
+    font-family: 'Arial', sans-serif;
+    color: white;
+}
+
+.Easy {
+    background-image: url('./images/og level.png');
+}
+  
+.Medium {
+    background-image: url('./images/noir level.png');
+}
+  
+.Hard {
+    background-image: url('./images/biohazard level.png');
+}
+  
+.Final {
+    background-image: url('./images/sunset level.png');
+}
+
+
+
+h1 {
+    font-size: 10rem;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    -webkit-text-stroke: 2px black;
+    padding: 10px;
+}
+
+.next-level-btn,
+.main-menu-btn {
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #3c9aff;
+}
+
+.next-level-btn:hover,
+.main-menu-btn:hover {
+    background-color: #3c9aff;
+}

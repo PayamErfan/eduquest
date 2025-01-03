@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
+import { VideoOff } from 'lucide-react';
 
 export default function MediaCover() {
   return (
@@ -43,7 +44,15 @@ export default function MediaCover() {
             className="w-3/4"
             style={{ height: '250px', borderRadius: '8px' }}
           >
-            <source src="/spell.mp4"></source>
+            <source src="/wordQuest.mp4"></source>
+          </video>
+        </Link>
+        <Link href="/games/spelling">
+          <video
+            className="w-3/4 "
+            style={{ height: '250px', borderRadius: '8px' }}
+          >
+            <source src-="/spell.mp4"></source>
           </video>
         </Link>
       </div>

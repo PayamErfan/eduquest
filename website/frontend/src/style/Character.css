@@ -1,0 +1,13 @@
+#Moski {
+    position: absolute;
+    object-position: left bottom;
+    width: 300px; /* Adjust size as needed */
+    height: auto;
+    bottom: 5rem;
+    left: 60rem;
+    transition: transform 0.3s ease; /* Smooth movement */
+}
+
+html {
+    font-size: 1vmin;
+}

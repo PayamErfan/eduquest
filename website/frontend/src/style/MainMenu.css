@@ -38,11 +38,24 @@ h1 {
     padding: 10px;
 }
 
+
 .select-level {
     font-size: 2rem;
     margin-bottom: 2rem;
     border: none;
-    padding: 5px
+    padding: 5px;
+}
+
+
+.select-level-text {
+    font-size: 5rem;
+    color: white;
+    margin: 20px 0;
+    text-align: center;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    font-weight: bolder;
+    -webkit-text-stroke: 1px black;
+    padding: 5px;
 }
 
 button {
